@@ -11,6 +11,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 * [pss.hexpat](pss.hexpat) - Custom .PSS container, which contains audio/video streams
 * [savefile.hexpat](savefile.hexpat) - Save file format
 * [sst.hexpat](sst.hexpat) - Stage definition files (.SST) [VFS support]
+* [tim2.hexpat](tim2.hexpat) - Texture files
 
 Incomplete patterns:
 

@@ -20,13 +20,19 @@ struct MenuEntry {
     u32 PosY;
     u32 Width;
     u32 Height;
-    padding[0xC];
+    padding[1];
+    //bool Disp;
+    bool BgItem;
+    //bool ImageLock;
+    padding[2];
+    u32 Dipth; // name from XML files, maybe a typo?
+    u32 Blend;
     u32 Index;
 };
 
 struct Section {
     String20 SectionNameArea;
-    padding[4];
+    padding[4]; // disp/glock?
     u32 EntryCount[3];
     MenuEntry Entries[EntryCount[0]];
 };

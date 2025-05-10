@@ -15,6 +15,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 Incomplete patterns:
 
 * [mlb.hexpat](mlb.hexpat) - Layout for various in-game menus
+* [hd.hexpat](hd.hexpat) - Soundbank (VAB) header file
 
 ## Importing these files
 

@@ -12,6 +12,10 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 * [savefile.hexpat](savefile.hexpat) - Save file format
 * [sst.hexpat](sst.hexpat) - Stage definition files (.SST) [VFS support]
 
+Incomplete patterns:
+
+* [mlb.hexpat](mlb.hexpat) - Layout for various in-game menus
+
 ## Importing these files
 
 1. Open a desired file in ImHex hex editor.

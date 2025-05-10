@@ -11,6 +11,6 @@ struct Entry {
     u16 Length;
     padding[2];
     String Message @ Offset;
-};
+} [[single_color]];
 
 Entry TOC[TOCEntriesCount] @ TOCOffset;

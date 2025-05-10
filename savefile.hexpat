@@ -1,11 +1,11 @@
 #include <std/mem>
 
 u64 Magic @ 0x00;
-u32 SecondaryCRC32 @ 0x08;
-u32 PrimaryCRC32 @ 0x0C;
+u32 SecondaryCRC32 @ 0x08 [[name("Secondary checksum (CRC32)")]];
+u32 PrimaryCRC32 @ 0x0C [[name("Primary checksum (CRC32)")]];
 u32 Score @ 0x28;
 u32 Combos @ 0x34;
-u32 OriginalGameStage @ 0x10C8;
+u32 OriginalGameStage @ 0x10C8 [[name("Original game stage")]];
 u32 Footer @ 0x277C;
 
 enum Control : u8 {
@@ -71,7 +71,7 @@ enum Mission : u32 {
 enum MissionType : u16 {
     Yellow,
     Red
-};
+} [[name("Mission type")]];
 
 enum Directory : u32 {
     JUNGLE1,
@@ -96,7 +96,7 @@ enum MissionStatus : u8 {
     NotCompleted,
     Started,
     Completed = 0x02 ... 0x03
-};
+} [[name("Mission status")]];
 
 struct StageMap {
     Directory BiologyA;
@@ -110,7 +110,7 @@ struct StageMap {
     Directory OpticsB;
     Directory GeometryA;
     Directory EvolutionD;
-};
+} [[single_color]];
 
 enum SoundMode : u8 {
     Mono,
@@ -121,7 +121,7 @@ enum StageCompletion : u8 {
     NotCompleted,
     Started,
     Completed = 0x03
-};
+} [[name("Stage completion")]];;
 
 enum Difficulty : u32 {
     Easy,
@@ -140,31 +140,31 @@ struct ScoreRow {
     padding[4];
     Difficulty Difficulty;
     u32 Combos;
-    String InitialsArea;
+    String InitialsArea [[name("Initials (reserved area)")]];
     padding[4];
-    u32 DefaultScore;
+    u32 DefaultScore [[name("Default score")]];
 };
 
 struct ScoreBoard {
     ScoreRow Rank[5];
-};
+} [[single_color]];
 
 struct Ranking {
-    ScoreBoard OriginalGame;
-    ScoreBoard BiologyA;
-    ScoreBoard MetallurgyA;
-    ScoreBoard OpticsA;
-    ScoreBoard BiologyB;
-    ScoreBoard MetallurgyB;
-    ScoreBoard OpticsB;
-    ScoreBoard GeometryA;
-    ScoreBoard BiologyATimeAttack;
-    ScoreBoard MetallurgyATimeAttack;
-    ScoreBoard OpticsATimeAttack;
-    ScoreBoard BiologyBTimeAttack;
-    ScoreBoard MetallurgyBTimeAttack;
-    ScoreBoard OpticsBTimeAttack;
-    ScoreBoard GeometryATimeAttack;
+    ScoreBoard OriginalGame [[name("Original game")]];
+    ScoreBoard BiologyA [[name("Biology A")]];
+    ScoreBoard MetallurgyA [[name("Metallurgy A")]];
+    ScoreBoard OpticsA [[name("Optics A")]];
+    ScoreBoard BiologyB [[name("Biology B")]];
+    ScoreBoard MetallurgyB [[name("Metallurgy B")]];
+    ScoreBoard OpticsB [[name("Optics B")]];
+    ScoreBoard GeometryA [[name("Geometry A")]];
+    ScoreBoard BiologyATimeAttack [[name("Biology A (Time Attack)")]];
+    ScoreBoard MetallurgyATimeAttack [[name("Metallurgy A (Time Attack)")]];
+    ScoreBoard OpticsATimeAttack [[name("Optics A (Time Attack)")]];
+    ScoreBoard BiologyBTimeAttack [[name("Biology B (Time Attack)")]];
+    ScoreBoard MetallurgyBTimeAttack [[name("Metallurgy B (Time Attack)")]];
+    ScoreBoard OpticsBTimeAttack [[name("Optics B (Time Attack)")]];
+    ScoreBoard GeometryATimeAttack [[name("Geometry A (Time Attack)")]];
 };
 
 struct MissionMap {
@@ -193,7 +193,7 @@ struct StageBool {
     StageCompletion OpticsB;
     StageCompletion GeometryA;
     StageCompletion EvolutionD;
-};
+} [[single_color]];
 
 struct MissionTypes {
     MissionType Color[0x20];
@@ -211,30 +211,31 @@ struct HelpIndicies {
     u8 MissionImageIndex[0x20];
 };
 
-Difficulty Difficulty @ 0x30;
-SoundMode SoundMode @ 0x10;
-s8 SFXVolume @ 0x11;
-s8 BGMVolume @ 0x12;
-bool DisableVibration @ 0x13;
+Difficulty Difficulty @ 0x30 [[name("Difficulty level")]];
+SoundMode SoundMode @ 0x10 [[name("Sound mode")]];
+s8 SFXVolume @ 0x11 [[name("SFX volume")]];
+s8 BGMVolume @ 0x12 [[name("BGM volume")]];
+bool DisableVibration @ 0x13 [[name("Disable vibration")]];;
 
-Control LeftNudge @ 0x16;
-Control RightNudge @ 0x17;
-Control LeftFlipper @ 0x23;
-Control RightFlipper @ 0x19;
+Control LeftNudge @ 0x16 [[name("Left nudge")]];
+Control RightNudge @ 0x17 [[name("Right nudge")]];
+Control LeftFlipper @ 0x23  [[name("Left flipper")]];
+Control RightFlipper @ 0x19 [[name("Right flipper")]];
 
-StageBool OriginalUnlocks @ 0x274C;
-StageBool FreeplayUnlocks @ 0x275C;
-StageBool LastPlayedStage @ 0x276C;
+StageBool OriginalUnlocks @ 0x274C [[name("Original game unlocks")]];
+StageBool FreeplayUnlocks @ 0x275C [[name("Free play unlocks")]];
+StageBool LastPlayedStage @ 0x276C [[name("Last stage played")]];
 
-u32 MissionRows[11] @ 0x110C;
+u32 MissionRows[11] @ 0x110C [[name("Mission rows")]];
 
 Ranking Ranking @ 0x60;
 StageMap Stages @ 0x10CC;
-MissionMap MissionNames @ 0x114C;
+MissionMap MissionNames @ 0x114C [[name("Mission names")]];;
 
-MissionTypes MissionTypes[11] @ 0x194C;
-StageProgression StageStatusOriginalGame[11] @ 0x214C;
-StageProgression StageStatusFreeplay[11] @ 0x234C;
-StageProgression StageStatusCurrent[11] @ 0x254C;
-Subpages MissionSubpages[11] @ 0x1F4C;
-HelpIndicies MissionImageIndicies[11] @ 0x1D4C;
+
+MissionTypes MissionTypes[11] @ 0x194C [[name("Mission types")]];
+StageProgression StageStatusOriginalGame[11] @ 0x214C [[name("Original game stage status")]];
+StageProgression StageStatusFreeplay[11] @ 0x234C [[name("Free play stage status")]];
+StageProgression StageStatusCurrent[11] @ 0x254C [[name("Last session stage status")]];
+Subpages MissionSubpages[11] @ 0x1F4C [[name("Mission subpages")]];;
+HelpIndicies MissionImageIndicies[11] @ 0x1D4C [[name("Mission indicies")]];;

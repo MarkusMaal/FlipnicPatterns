@@ -12,13 +12,13 @@ struct CdEntry {
     const u32 Size = std::mem::read_unsigned($+0x3C, 4) - Offset;
     Data Data @ Offset * 0x800;
     hex::core::add_virtual_file(Filename, Data);
-};
+} [[single_color]];
 
 struct TOCMarker {
     char Marker[while(std::mem::read_unsigned($, 1) != 0x0)];
     padding[while(std::mem::read_unsigned($, 1) == 0x0)];
     u32 Offset;
-};
+} [[single_color]];
 
 TOCMarker StreamStartPointer @ 0x00;
 CdEntry TOC[while(std::mem::read_unsigned($, 4) != 0x646E452A)] @ 0x40;

@@ -1,0 +1,25 @@
+#include <std/mem>
+#include <hex/core>
+
+struct Data {
+    u8 Section[parent.Size * 0x800];
+};
+
+struct CdEntry {
+    char Filename[while(std::mem::read_unsigned($, 1) != 0x0)];
+    padding[while(std::mem::read_unsigned($, 1) == 0x0 && ($ % 0x40 != 0x3C))];
+    u32 Offset;
+    const u32 Size = std::mem::read_unsigned($+0x3C, 4) - Offset;
+    Data Data @ Offset * 0x800;
+    hex::core::add_virtual_file(Filename, Data);
+};
+
+struct TOCMarker {
+    char Marker[while(std::mem::read_unsigned($, 1) != 0x0)];
+    padding[while(std::mem::read_unsigned($, 1) == 0x0)];
+    u32 Offset;
+};
+
+TOCMarker StreamStartPointer @ 0x00;
+CdEntry TOC[while(std::mem::read_unsigned($, 4) != 0x646E452A)] @ 0x40;
+TOCMarker StreamEndPointer @ $;

@@ -1,4 +1,12 @@
 #include <std/mem>
+#include <std/hash>
+
+struct PrimaryData {
+    u8 Data[0x2770];
+};
+
+PrimaryData pD @ 0x10 [[hidden]];
+u32 CalculatedCRC32 = std::hash::crc32(pD, 0xFFFFFFFF, 0x4C11DB7, 0x0, true, true) [[export]];
 
 u64 Magic @ 0x00;
 u32 SecondaryCRC32 @ 0x08 [[name("Secondary checksum (CRC32)")]];

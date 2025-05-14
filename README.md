@@ -12,6 +12,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 * [savefile.hexpat](savefile.hexpat) - Save file format
 * [sst.hexpat](sst.hexpat) - Stage definition files (.SST) [VFS support]
 * [tim2.hexpat](tim2.hexpat) - Texture files
+* [saveicon.hexpat](saveicon.hexpat) - Save file icon (FICON.ICO)
 
 Incomplete patterns:
 

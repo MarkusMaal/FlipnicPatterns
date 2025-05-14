@@ -17,7 +17,6 @@ Incomplete patterns:
 
 * [mlb.hexpat](mlb.hexpat) - Layout for various in-game menus
 * [hd.hexpat](hd.hexpat) - Soundbank (VAB) header file
-* [fpc.hexpat](fpc.hexpat) - Camera sequences
 
 ## Importing these files
 

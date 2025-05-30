@@ -70,6 +70,7 @@ struct StageEvent {
     char EventLabel[while(std::mem::read_unsigned($,1) != 0x0)];
     padding[while ($ < Start + 0x20)];
     if (EventLabel == "GAME_EVENT") {
+        bool DisableIntro @ $ + 0x84;
         u32 UnknownData[2];
         BallCounts BallCounts[3];
     } else

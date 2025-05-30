@@ -18,6 +18,7 @@ Incomplete patterns:
 
 * [mlb.hexpat](mlb.hexpat) - Layout for various in-game menus
 * [hd.hexpat](hd.hexpat) - Soundbank (VAB) header file
+* [lp4.hexpat](lp4.hexpat) - Game resource file (usually 3D models and 2D text animations)
 
 ## Importing these files
 

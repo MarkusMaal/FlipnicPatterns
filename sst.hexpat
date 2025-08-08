@@ -10,6 +10,25 @@ enum FMVType : u32 {
     HiRes
 };
 
+enum FontTypes : u32 {
+    Invisible,
+    CenterRegular = 0x04,
+    Jackpot,
+    SuperJackpot,
+    WonderfulBackdrop = 0x08,
+    WonderfulText,
+    TotalLaneCounts,
+    TotalBumperCounts,
+    Bonus,
+    ComboTopLeft,
+    LaneCountsCenter,
+    TimerTopRight,
+    CenterAnimated,
+    AllFlamingoes,
+    ZeroGravity,
+    ComboBonusPoints
+};
+
 struct BallName {
     const u32 Start = $;
     char Ball1[while(std::mem::read_unsigned($,1) != 0x0)];
@@ -73,6 +92,23 @@ struct StageEvent {
         bool DisableIntro @ $ + 0x84;
         u32 UnknownData[2];
         BallCounts BallCounts[3];
+    } else if (EventLabel == "FONT") {
+        padding[4];
+        FontTypes FontType;
+        u32 MessageIdx;
+        FontTypes FontSecondary;
+        u32 SecondaryMessageIdx;
+        padding[0xC];
+    } else if (EventLabel == "FONT_EVENT") {
+        padding[4];
+        bool FontEnable;
+        padding[3];
+        FontTypes FontType;
+        u32 MessageIdx;
+        u32 Duration;
+        u32 EntranceAnimationId;
+        u32 ExitAnimationId;
+        padding[0x4];
     } else
     u8 UnknownData[0x20];
 };

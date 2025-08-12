@@ -83,6 +83,18 @@ struct BallCounts {
     u32 Credits;
 };
 
+enum GameEvent : u32 {
+    Timer = 0x04,
+    Mission = 0x08
+};
+
+enum MissionStatus : u32 {
+    Incomplete,
+    Started,
+    Completed,
+    StartedCompleted
+};
+
 struct StageEvent {
     const u32 Start = $;
     u32 Parameter;
@@ -109,6 +121,17 @@ struct StageEvent {
         u32 EntranceAnimationId;
         u32 ExitAnimationId;
         padding[0x4];
+    } else if (EventLabel == "" && Parameter == 0x9) {
+        padding[4];
+        GameEvent EventType;
+        if (EventType == 0x08) {
+            s32 MissionId;
+            MissionStatus StatusFlag;
+        } else {
+            u32 UnknownId;
+            u32 UnknownValue;
+        }
+        padding[0x10];
     } else
     u8 UnknownData[0x20];
 };

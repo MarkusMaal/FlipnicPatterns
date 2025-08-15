@@ -6,6 +6,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 
 * [binfile.hexpat](binfile.hexpat) - Virtual filesystem for .BIN blob files [VFS support]
 * [folder.hexpat](folder.hexpat) - Subfolders in .BIN blob files [VFS support]
+* [fpc.hexpat](fpc.hexpat) - Camera sequences
 * [ipu.hexpat](ipu.hexpat) - While Flipnic uses .IPU files, which are found in many PS2 games, it has made a few modifications to header and footer, which can be seen with this pattern file
 * [msg.hexpat](msg.hexpat) - JA.MSG file (strings used by the game)
 * [pss.hexpat](pss.hexpat) - Custom .PSS container, which contains audio/video streams

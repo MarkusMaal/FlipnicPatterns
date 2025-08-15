@@ -1,5 +1,5 @@
 // massive help on the Jam header format
-// 
+// https://raw.githubusercontent.com/Nenkai/GT-File-Specifications-Documentation/refs/heads/master/Formats/PS2/GT4/GT4_INST_SShd_Jam_Custom.bt
 
 
 #include <std/mem>

@@ -18,7 +18,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 Incomplete patterns:
 
 * [mlb.hexpat](mlb.hexpat) - Layout for various in-game menus
-* [hd.hexpat](hd.hexpat) - Soundbank (VAB) header file
+* [hd.hexpat](hd.hexpat) - Soundbank (VAB) header file (pattern is displayed correctly for music soundbanks, but sound effect .hd visualization is incomplete)
 * [lp4.hexpat](lp4.hexpat) - Game resource file (usually 3D models and 2D text animations)
 
 ## Importing these files

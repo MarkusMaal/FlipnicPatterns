@@ -14,6 +14,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 * [sst.hexpat](sst.hexpat) - Stage definition files (.SST)
 * [tim2.hexpat](tim2.hexpat) - Texture files
 * [saveicon.hexpat](saveicon.hexpat) - Save file icon (FICON.ICO)
+* [vsd.hexpat](vsd.hexpat) - Vibration strength data (.VSD)
 
 Incomplete patterns:
 

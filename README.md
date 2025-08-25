@@ -47,19 +47,19 @@ Incomplete patterns:
 | CSV        | Comma seperated values     |✅     |✅       | Development left-overs, unused by the game                                    |
 | FPC        | Camera sequences           |✅     |❌       | Can also contain camera animations                                            |
 | FPD        | AI path data?              |❌     |❌       | Looks similar to FPC, maybe next one to figure out?                           |
-| HD/BD      | VAB soundbank files        | Part.  |❌       | Can understand the contents, but SF2 conversion requires further research     |
-| ICO        | Save file icon             |✅     | ?        | Apparently a standard format                                                  |
+| HD/BD      | VAB soundbank files        | 🅿️  |❌       | Can understand the contents, but SF2 conversion requires further research     |
+| ICO        | Save file icon             |✅     | ❔        | Apparently a standard format                                                  |
 | LAY        | "Layout" files             |❌     |❌       | Defines what models can be gimmicks, I guess?                                 |
 | LIT        | Light tables               |❌     |❌       | Controls how the stage is lit                                                 |
 | LP4        | Flipnic resources          |❌     |❌       | Can be 2D or 3D and sometimes animated, a bizarre format                      |
 | MID        | MIDI sequences             |✅     |✅       | Just general MIDI played on specific channels specified by .HD/.BD files      |
 | MLB        | Menu layout (binary?)      |✅     |❌       | Used to stitch various textures together to create a menu interface           |
 | MSG        | Message tables             |✅     |✅       | Strings used by the game                                                      |
-| PSS        | Interleaved audio/video    |✅     | Part.    | Generation is only possible with a donor file and audio stutters              |
+| PSS        | Interleaved audio/video    |✅     | 🅿️    | Generation is only possible with a donor file and audio stutters              |
 | PSS.INT    | Audio stream               |✅     |✅       | Stereo Sony ADPCM compressed audio stream (interleave 0x400)                  |
 | PSS.IPU    | IPU video                  |✅     |✅       | Modified version of M2V for PlayStation 2                                     |
 | SCC        | ???                        |❌     |❌       | Maybe memory offsets? Also why do they all have the same name?                |
-| SST        | Stage (special?) table     | Part.  |❌       | Contains stuff like gimmicks, list of files and event system                  |
+| SST        | Stage (special?) table     | 🅿️  |❌       | Contains stuff like gimmicks, list of files and event system                  |
 | SVAG       | Mono audio stream          |✅     |✅       | Sony ADPCM compressed again, but single audio channel this time               |
 | TM2        | Texture image map 2 (TIM2) |✅     |✅       | Standard texture file for PlayStation 2 games                                 |
 | VSD        | Vibration data             |✅     |❌       | Controls when the controller should vibrate, maybe has relations to gimmicks  |

@@ -47,7 +47,7 @@ Incomplete patterns:
 | CSV        | Comma seperated values     | ✅     | ✅       | Development left-overs, unused by the game                                    | Text editor/spreadsheet |
 | FPC        | Camera sequences           | ✅     | ❌       | Can also contain camera animations                                            | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | FPD        | AI path data?              | ❌     | ❌       | Looks similar to FPC, maybe next one to figure out?                           | N/A                     |
-| HD/BD      | VAB soundbank files        | ⚠     | ❌       | Can understand the contents, but SF2 conversion requires further research     | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
+| HD/BD      | VAB soundbank files        | ⚠️     | ❌       | Can understand the contents, but SF2 conversion requires further research     | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | ICO        | Save file icon             | ✅     | ❔       | Apparently a standard format                                                  | [PS2 Save Builder](https://www.ps2savetools.com/download/ps2-save-builder/)        |
 | LAY        | "Layout" files             | ❌     | ❌       | Defines what models can be gimmicks, I guess?                                 | N/A                     |
 | LIT        | Light tables               | ❌     | ❌       | Controls how the stage is lit                                                 | N/A                     |
@@ -55,11 +55,11 @@ Incomplete patterns:
 | MID        | MIDI sequences             | ✅     | ✅       | Just general MIDI played on specific channels specified by .HD/.BD files      | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/Midi sequencers     |
 | MLB        | Menu layout (binary?)      | ✅     | ❌       | Used to stitch various textures together to create a menu interface           | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | MSG        | Message tables             | ✅     | ✅       | Strings used by the game                                                      | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/[FSE](https://github.com/MarkusMaal/FlipnicSaveEditor)/Private tools   |
-| PSS        | Interleaved audio/video    | ✅     | ⚠       | Generation is only possible with a donor file and audio stutters              | [FBE](https://github.com/MarkusMaal/FlipnicBinExtractor)/[FFS](https://github.com/MarkusMaal/FlipnicFs)/[FFT](https://github.com/MarkusMaal/FlipnicFileTools)             |
+| PSS        | Interleaved audio/video    | ✅     | ⚠️       | Generation is only possible with a donor file and audio stutters              | [FBE](https://github.com/MarkusMaal/FlipnicBinExtractor)/[FFS](https://github.com/MarkusMaal/FlipnicFs)/[FFT](https://github.com/MarkusMaal/FlipnicFileTools)             |
 | PSS.INT    | Audio stream               | ✅     | ✅       | Stereo Sony ADPCM compressed audio stream (interleave 0x400)                  | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/[MFAudio](https://gamebanana.com/tools/6656)             |
 | PSS.IPU    | IPU video                  | ✅     | ✅       | Modified version of M2V for PlayStation 2                                     | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/[FFmpeg](https://ffmpeg.org)/ps2str       |
 | SCC        | ???                        | ❌     | ❌       | Maybe memory offsets? Also why do they all have the same name?                | N/A                     |
-| SST        | Stage (special?) table     | ⚠     | ❌       | Contains stuff like gimmicks, list of files and event system                  | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
+| SST        | Stage (special?) table     | ⚠️     | ❌       | Contains stuff like gimmicks, list of files and event system                  | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | SVAG       | Mono audio stream          | ✅     | ✅       | Sony ADPCM compressed again, but single audio channel this time               | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/[MFAudio](https://gamebanana.com/tools/6656)             |
 | TM2        | Texture image map 2 (TIM2) | ✅     | ✅       | Standard texture file for PlayStation 2 games                                 | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/XnViewMP/etc.       |
 | VSD        | Vibration data             | ✅     | ❌       | Controls when the controller should vibrate, maybe has relations to gimmicks  | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
@@ -73,5 +73,5 @@ Key:
 
 ✅ Working  
 ❌ Not working  
-⚠️ Read notes  
+⚠️️ Read notes  
 ❔ Maybe done

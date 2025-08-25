@@ -42,27 +42,27 @@ Incomplete patterns:
 
 | Extension  | Description                | Decode | Generate | Notes                                                                         |
 |------------|----------------------------|--------|----------|-------------------------------------------------------------------------------|
-| BIN        | Blob files                 |[X]     |[X]       | Can generate, but making a RES.BIN from scratch causes the game to crash      |
-| COL        | Collision maps             |[ ]     |[ ]       | Appears to have similar structure to LP4 files                                |
-| CSV        | Comma seperated values     |[X]     |[X]       | Development left-overs, unused by the game                                    |
-| FPC        | Camera sequences           |[X]     |[ ]       | Can also contain camera animations                                            |
-| FPD        | AI path data?              |[ ]     |[ ]       | Looks similar to FPC, maybe next one to figure out?                           |
-| HD/BD      | VAB soundbank files        | Part.  |[ ]       | Can understand the contents, but SF2 conversion requires further research     |
-| ICO        | Save file icon             |[X]     | ?        | Apparently a standard format                                                  |
-| LAY        | "Layout" files             |[ ]     |[ ]       | Defines what models can be gimmicks, I guess?                                 |
-| LIT        | Light tables               |[ ]     |[ ]       | Controls how the stage is lit                                                 |
-| LP4        | Flipnic resources          |[ ]     |[ ]       | Can be 2D or 3D and sometimes animated, a bizarre format                      |
-| MID        | MIDI sequences             |[X]     |[X]       | Just general MIDI played on specific channels specified by .HD/.BD files      |
-| MLB        | Menu layout (binary?)      |[X]     |[ ]       | Used to stitch various textures together to create a menu interface           |
-| MSG        | Message tables             |[X]     |[X]       | Strings used by the game                                                      |
-| PSS        | Interleaved audio/video    |[X]     | Part.    | Generation is only possible with a donor file and audio stutters              |
-| PSS.INT    | Audio stream               |[X]     |[X]       | Stereo Sony ADPCM compressed audio stream (interleave 0x400)                  |
-| PSS.IPU    | IPU video                  |[X]     |[X]       | Modified version of M2V for PlayStation 2                                     |
-| SCC        | ???                        |[ ]     |[ ]       | Maybe memory offsets? Also why do they all have the same name?                |
-| SST        | Stage (special?) table     | Part.  |[ ]       | Contains stuff like gimmicks, list of files and event system                  |
-| SVAG       | Mono audio stream          |[X]     |[X]       | Sony ADPCM compressed again, but single audio channel this time               |
-| TM2        | Texture image map 2 (TIM2) |[X]     |[X]       | Standard texture file for PlayStation 2 games                                 |
-| VSD        | Vibration data             |[X]     |[ ]       | Controls when the controller should vibrate, maybe has relations to gimmicks  |
-| XML        | eXtensible Markup Language |[X]     |[X]       | Developer left-overs, unused by the game                                      |
-| GAME_ID    | Save file format           |[X]     |[X]       | Checksums are just CRC-32/JAMCRC, primary at 0xC, secondary at 0x8            |
-| GAME_ID    | Game executable (footer)   |[ ]     |[ ]       | Some strings and memory addresses can be modified to change menu actions    |
+| BIN        | Blob files                 |✅     |✅       | Can generate, but making a RES.BIN from scratch causes the game to crash      |
+| COL        | Collision maps             |❌     |❌       | Appears to have similar structure to LP4 files                                |
+| CSV        | Comma seperated values     |✅     |✅       | Development left-overs, unused by the game                                    |
+| FPC        | Camera sequences           |✅     |❌       | Can also contain camera animations                                            |
+| FPD        | AI path data?              |❌     |❌       | Looks similar to FPC, maybe next one to figure out?                           |
+| HD/BD      | VAB soundbank files        | Part.  |❌       | Can understand the contents, but SF2 conversion requires further research     |
+| ICO        | Save file icon             |✅     | ?        | Apparently a standard format                                                  |
+| LAY        | "Layout" files             |❌     |❌       | Defines what models can be gimmicks, I guess?                                 |
+| LIT        | Light tables               |❌     |❌       | Controls how the stage is lit                                                 |
+| LP4        | Flipnic resources          |❌     |❌       | Can be 2D or 3D and sometimes animated, a bizarre format                      |
+| MID        | MIDI sequences             |✅     |✅       | Just general MIDI played on specific channels specified by .HD/.BD files      |
+| MLB        | Menu layout (binary?)      |✅     |❌       | Used to stitch various textures together to create a menu interface           |
+| MSG        | Message tables             |✅     |✅       | Strings used by the game                                                      |
+| PSS        | Interleaved audio/video    |✅     | Part.    | Generation is only possible with a donor file and audio stutters              |
+| PSS.INT    | Audio stream               |✅     |✅       | Stereo Sony ADPCM compressed audio stream (interleave 0x400)                  |
+| PSS.IPU    | IPU video                  |✅     |✅       | Modified version of M2V for PlayStation 2                                     |
+| SCC        | ???                        |❌     |❌       | Maybe memory offsets? Also why do they all have the same name?                |
+| SST        | Stage (special?) table     | Part.  |❌       | Contains stuff like gimmicks, list of files and event system                  |
+| SVAG       | Mono audio stream          |✅     |✅       | Sony ADPCM compressed again, but single audio channel this time               |
+| TM2        | Texture image map 2 (TIM2) |✅     |✅       | Standard texture file for PlayStation 2 games                                 |
+| VSD        | Vibration data             |✅     |❌       | Controls when the controller should vibrate, maybe has relations to gimmicks  |
+| XML        | eXtensible Markup Language |✅     |✅       | Developer left-overs, unused by the game                                      |
+| GAME_ID    | Save file format           |✅     |✅       | Checksums are just CRC-32/JAMCRC, primary at 0xC, secondary at 0x8            |
+| GAME_ID    | Game executable (footer)   |❌     |❌       | Some strings and memory addresses can be modified to change menu actions    |

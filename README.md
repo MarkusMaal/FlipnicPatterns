@@ -43,7 +43,7 @@ Incomplete patterns:
 | Extension  | Description                | Decode | Generate | Notes                                                                         | Tool(s)                 |
 |------------|----------------------------|--------|----------|-------------------------------------------------------------------------------|-------------------------|
 | BIN        | Blob files                 | ✅     | ✅       | Can generate, but making a RES.BIN from scratch causes the game to crash      | [FBE](https://github.com/MarkusMaal/FlipnicBinExtractor)/[FFS](https://github.com/MarkusMaal/FlipnicFs)/[FFT](https://github.com/MarkusMaal/FlipnicFileTools)             |
-| COL        | Collision maps             | ❌     | ❌       | Appears to have similar structure to LP4 files                                | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
+| COL        | Collision maps             | ❌     | ❌       | Appears to have similar structure to LP4 files                                | N/A                     |
 | CSV        | Comma seperated values     | ✅     | ✅       | Development left-overs, unused by the game                                    | Text editor/spreadsheet |
 | FPC        | Camera sequences           | ✅     | ❌       | Can also contain camera animations                                            | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | FPD        | AI path data?              | ❌     | ❌       | Looks similar to FPC, maybe next one to figure out?                           | N/A                     |

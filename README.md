@@ -4,6 +4,7 @@ This repository contains hex patterns that can be used with ImHex and are specif
 
 This is a part of the Flipnic extraction project, where we try to understand as much of the game's file formats as possible.
 
+
 * [binfile.hexpat](binfile.hexpat) - Virtual filesystem for .BIN blob files [VFS support]
 * [folder.hexpat](folder.hexpat) - Subfolders in .BIN blob files [VFS support]
 * [fpc.hexpat](fpc.hexpat) - Camera sequences
@@ -22,6 +23,7 @@ Incomplete patterns:
 * [hd.hexpat](hd.hexpat) - Soundbank (VAB) header file (pattern is displayed correctly for music soundbanks, but sound effect .hd visualization is incomplete)
 * [lp4.hexpat](lp4.hexpat) - Game resource file (usually 3D models and 2D text animations)
 
+
 ## Importing these files
 
 1. Open a desired file in ImHex hex editor.
@@ -35,3 +37,32 @@ Incomplete patterns:
 9. If done correctly, certain areas of the file should get highlighted
 10. If a pattern file has VFS support, you can also see stuff on the "Virtual Filesystem" tab. You can right click on a file and select "Open Selection View" or double click to analyze hex data of the virtual file separately.
 
+
+## Progress
+
+| Extension  | Description                | Decode | Generate | Notes                                                                         |
+|------------|----------------------------|--------|----------|-------------------------------------------------------------------------------|
+| BIN        | Blob files                 |[X]     |[X]       | Can generate, but making a RES.BIN from scratch causes the game to crash      |
+| COL        | Collision maps             |[ ]     |[ ]       | Appears to have similar structure to LP4 files                                |
+| CSV        | Comma seperated values     |[X]     |[X]       | Development left-overs, unused by the game                                    |
+| FPC        | Camera sequences           |[X]     |[ ]       | Can also contain camera animations                                            |
+| FPD        | AI path data?              |[ ]     |[ ]       | Looks similar to FPC, maybe next one to figure out?                           |
+| HD/BD      | VAB soundbank files        | Part.  |[ ]       | Can understand the contents, but SF2 conversion requires further research     |
+| ICO        | Save file icon             |[X]     | ?        | Apparently a standard format                                                  |
+| LAY        | "Layout" files             |[ ]     |[ ]       | Defines what models can be gimmicks, I guess?                                 |
+| LIT        | Light tables               |[ ]     |[ ]       | Controls how the stage is lit                                                 |
+| LP4        | Flipnic resources          |[ ]     |[ ]       | Can be 2D or 3D and sometimes animated, a bizarre format                      |
+| MID        | MIDI sequences             |[X]     |[X]       | Just general MIDI played on specific channels specified by .HD/.BD files      |
+| MLB        | Menu layout (binary?)      |[X]     |[ ]       | Used to stitch various textures together to create a menu interface           |
+| MSG        | Message tables             |[X]     |[X]       | Strings used by the game                                                      |
+| PSS        | Interleaved audio/video    |[X]     | Part.    | Generation is only possible with a donor file and audio stutters              |
+| PSS.INT    | Audio stream               |[X]     |[X]       | Stereo Sony ADPCM compressed audio stream (interleave 0x400)                  |
+| PSS.IPU    | IPU video                  |[X]     |[X]       | Modified version of M2V for PlayStation 2                                     |
+| SCC        | ???                        |[ ]     |[ ]       | Maybe memory offsets? Also why do they all have the same name?                |
+| SST        | Stage (special?) table     | Part.  |[ ]       | Contains stuff like gimmicks, list of files and event system                  |
+| SVAG       | Mono audio stream          |[X]     |[X]       | Sony ADPCM compressed again, but single audio channel this time               |
+| TM2        | Texture image map 2 (TIM2) |[X]     |[X]       | Standard texture file for PlayStation 2 games                                 |
+| VSD        | Vibration data             |[X]     |[ ]       | Controls when the controller should vibrate, maybe has relations to gimmicks  |
+| XML        | eXtensible Markup Language |[X]     |[X]       | Developer left-overs, unused by the game                                      |
+| GAME_ID    | Save file format           |[X]     |[X]       | Checksums are just CRC-32/JAMCRC, primary at 0xC, secondary at 0x8            |
+| GAME_ID    | Game executable (footer)   |[ ]     |[ ]       | Some strings and memory addresses can be modified to change menu actions    |

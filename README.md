@@ -5,23 +5,23 @@ This repository contains hex patterns that can be used with ImHex and are specif
 This is a part of the Flipnic extraction project, where we try to understand as much of the game's file formats as possible.
 
 
-* [binfile.hexpat](binfile.hexpat) - Virtual filesystem for .BIN blob files [VFS support]
-* [folder.hexpat](folder.hexpat) - Subfolders in .BIN blob files [VFS support]
-* [fpc.hexpat](fpc.hexpat) - Camera sequences
-* [ipu.hexpat](ipu.hexpat) - While Flipnic uses .IPU files, which are found in many PS2 games, it has made a few modifications to header and footer, which can be seen with this pattern file
-* [msg.hexpat](msg.hexpat) - JA.MSG file (strings used by the game)
-* [pss.hexpat](pss.hexpat) - Custom .PSS container, which contains audio/video streams
-* [savefile.hexpat](savefile.hexpat) - Save file format
-* [sst.hexpat](sst.hexpat) - Stage definition files (.SST)
-* [tim2.hexpat](tim2.hexpat) - Texture files
-* [saveicon.hexpat](saveicon.hexpat) - Save file icon (FICON.ICO)
-* [vsd.hexpat](vsd.hexpat) - Vibration strength data (.VSD)
+* [binfile.hexpat](patterns/binfile.hexpat) - Virtual filesystem for .BIN blob files [VFS support]
+* [folder.hexpat](patterns/folder.hexpat) - Subfolders in .BIN blob files [VFS support]
+* [fpc.hexpat](patterns/fpc.hexpat) - Camera sequences
+* [ipu.hexpat](patterns/ipu.hexpat) - While Flipnic uses .IPU files, which are found in many PS2 games, it has made a few modifications to header and footer, which can be seen with this pattern file
+* [msg.hexpat](patterns/msg.hexpat) - JA.MSG file (strings used by the game)
+* [pss.hexpat](patterns/pss.hexpat) - Custom .PSS container, which contains audio/video streams
+* [savefile.hexpat](patterns/savefile.hexpat) - Save file format
+* [sst.hexpat](patterns/sst.hexpat) - Stage definition files (.SST)
+* [tim2.hexpat](patterns/tim2.hexpat) - Texture files
+* [saveicon.hexpat](patterns/saveicon.hexpat) - Save file icon (FICON.ICO)
+* [vsd.hexpat](patterns/vsd.hexpat) - Vibration strength data (.VSD)
 
 Incomplete patterns:
 
-* [mlb.hexpat](mlb.hexpat) - Layout for various in-game menus
-* [hd.hexpat](hd.hexpat) - Soundbank (VAB) header file (pattern is displayed correctly for music soundbanks, but sound effect .hd visualization is incomplete)
-* [lp4.hexpat](lp4.hexpat) - Game resource file (usually 3D models and 2D text animations)
+* [mlb.hexpat](patterns/mlb.hexpat) - Layout for various in-game menus
+* [hd.hexpat](patterns/hd.hexpat) - Soundbank (VAB) header file (pattern is displayed correctly for music soundbanks, but sound effect .hd visualization is incomplete)
+* [lp4.hexpat](patterns/lp4.hexpat) - Game resource file (usually 3D models and 2D text animations)
 
 
 ## Importing these files

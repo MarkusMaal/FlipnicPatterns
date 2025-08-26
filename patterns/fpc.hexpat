@@ -2,6 +2,7 @@
  
 #pragma author MarkusMaal
 #pragma description Flipnic/Camera sequences
+#pragma magic [ 00 00 00 00 ?? ?? 00 00 10 00 00 00 ] @ 0x00
 #pragma endian little
 
 u8 Padding[4] @ 0;

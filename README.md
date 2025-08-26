@@ -7,21 +7,23 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 
 * [binfile.hexpat](patterns/binfile.hexpat) - Virtual filesystem for .BIN blob files [VFS support]
 * [folder.hexpat](patterns/folder.hexpat) - Subfolders in .BIN blob files [VFS support]
-* [fpc.hexpat](patterns/fpc.hexpat) - Camera sequences
+* [fpc.hexpat](patterns/fpc.hexpat) - Camera sequences (.FPC)
 * [ipu.hexpat](patterns/ipu.hexpat) - While Flipnic uses .IPU files, which are found in many PS2 games, it has made a few modifications to header and footer, which can be seen with this pattern file
 * [msg.hexpat](patterns/msg.hexpat) - JA.MSG file (strings used by the game)
 * [pss.hexpat](patterns/pss.hexpat) - Custom .PSS container, which contains audio/video streams
 * [savefile.hexpat](patterns/savefile.hexpat) - Save file format
 * [sst.hexpat](patterns/sst.hexpat) - Stage definition files (.SST)
-* [tim2.hexpat](patterns/tim2.hexpat) - Texture files
+* [tim2.hexpat](patterns/tim2.hexpat) - Texture files (.TM2)
 * [saveicon.hexpat](patterns/saveicon.hexpat) - Save file icon (FICON.ICO)
 * [vsd.hexpat](patterns/vsd.hexpat) - Vibration strength data (.VSD)
 
 Incomplete patterns:
 
-* [mlb.hexpat](patterns/mlb.hexpat) - Layout for various in-game menus
-* [hd.hexpat](patterns/hd.hexpat) - Soundbank (VAB) header file (pattern is displayed correctly for music soundbanks, but sound effect .hd visualization is incomplete)
-* [lay.hexpat](patterns/lay.hexpat) - The game uses these files to find where things are on the stage, as well as scaling and skew effects
+* [col.hexpat](patterns/col.hexpat) - Collision maps (.COL)
+* [fpd.hexpat](patterns/fpd.hexpat) - Object movement data (.FPD)
+* [mlb.hexpat](patterns/mlb.hexpat) - Layout for various in-game menus (.MLB)
+* [hd.hexpat](patterns/hd.hexpat) - Soundbank (VAB) header file (pattern is displayed correctly for music soundbanks, but sound effect .HD visualization is incomplete)
+* [lay.hexpat](patterns/lay.hexpat) - The game uses these files to find where things are on the stage, as well as scaling and skew effects (.LAY)
 * [lp4.hexpat](patterns/lp4.hexpat) - Game resource file (usually 3D models and 2D text animations)
 
 

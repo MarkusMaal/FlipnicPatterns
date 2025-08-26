@@ -26,16 +26,12 @@ Incomplete patterns:
 
 ## Importing these files
 
-1. Open a desired file in ImHex hex editor.
-2. Make sure you see "Pattern editor" on the right side. If not, check View > Pattern editor.
-3. Right click on text area of pattern editor
-4. Choose "Import Pattern File..."
-5. Choose "Browse.."
-6. Find matching .hexpat file
-7. Click "Open"
-8. Press the play button to evaluate the pattern
-9. If done correctly, certain areas of the file should get highlighted
-10. If a pattern file has VFS support, you can also see stuff on the "Virtual Filesystem" tab. You can right click on a file and select "Open Selection View" or double click to analyze hex data of the virtual file separately.
+1. Clone this repository
+2. Open ImHex
+3. Go to Extras > Settings > Folders
+4. Add a folder that points to this repository (IMPORTANT: choose the root directory, not patterns folder)
+5. Close the Settings window
+5. You can now apply a pattern if you go to File > Import > Pattern file or if you open a file with a known header, ImHex will automatically prompt you to apply a pattern
 
 
 ## Progress

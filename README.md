@@ -49,7 +49,7 @@ Incomplete patterns:
 | FPD        | AI path data?              | ❌     | ❌       | Looks similar to FPC, maybe next one to figure out?                           | N/A                     |
 | HD/BD      | VAB soundbank files        | ⚠️     | ❌       | Can understand the contents, but SF2 conversion requires further research     | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | ICO        | Save file icon             | ✅     | ❔       | Apparently a standard format                                                  | [PS2 Save Builder](https://www.ps2savetools.com/download/ps2-save-builder/)        |
-| LAY        | "Layout" files             | ❌     | ❌       | Defines what models can be gimmicks, I guess?                                 | N/A                     |
+| LAY        | Layout files               | ❌     | ❌       | Defines where the various objects on the stage are located                    | N/A                     |
 | LIT        | Light tables               | ❌     | ❌       | Controls how the stage is lit                                                 | N/A                     |
 | LP4        | Flipnic resources          | ❌     | ❌       | Can be 2D or 3D and sometimes animated, a bizarre format                      | N/A                     |
 | MID        | MIDI sequences             | ✅     | ✅       | Just general MIDI played on specific channels specified by .HD/.BD files      | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/Midi sequencers     |

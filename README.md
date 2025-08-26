@@ -31,7 +31,11 @@ Incomplete patterns:
 3. Go to Extras > Settings > Folders
 4. Add a folder that points to this repository (IMPORTANT: choose the root directory, not patterns folder)
 5. Close the Settings window
-5. You can now apply a pattern if you go to File > Import > Pattern file or if you open a file with a known header, ImHex will automatically prompt you to apply a pattern
+6. You can now apply a pattern if you go to File > Import > Pattern file
+
+If you open a file with a known header, ImHex will automatically prompt you to apply a pattern: 
+
+![Autodetection screenshot](screenshots/autodetect.png)
 
 
 ## Progress
@@ -42,9 +46,9 @@ Incomplete patterns:
 | COL        | Collision maps             | ❌     | ❌       | Appears to have similar structure to LP4 files                                | N/A                     |
 | CSV        | Comma seperated values     | ✅     | ✅       | Development left-overs, unused by the game                                    | Text editor/spreadsheet |
 | FPC        | Camera sequences           | ✅     | ❌       | Can also contain camera animations                                            | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
-| FPD        | AI path data?              | ❌     | ❌       | Looks similar to FPC, maybe next one to figure out?                           | N/A                     |
+| FPD        | Model movement sequences   | ❌     | ❌       | Looks similar to FPC, maybe next one to figure out?                           | N/A                     |
 | HD/BD      | VAB soundbank files        | ⚠️     | ❌       | Can understand the contents, but SF2 conversion requires further research     | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
-| ICO        | Save file icon             | ✅     | ❔       | Apparently a standard format                                                  | [PS2 Save Builder](https://www.ps2savetools.com/download/ps2-save-builder/)        |
+| ICO        | Save file icon             | ✅     | ✅       | Apparently a standard format                                                  | [PS2 Save Builder](https://www.ps2savetools.com/download/ps2-save-builder/)/[ps2iconsys](https://github.com/ticky/ps2iconsys.git)   |
 | LAY        | Layout files               | ❌     | ❌       | Defines where the various objects on the stage are located                    | N/A                     |
 | LIT        | Light tables               | ❌     | ❌       | Controls how the stage is lit                                                 | N/A                     |
 | LP4        | Flipnic resources          | ❌     | ❌       | Can be 2D or 3D and sometimes animated, a bizarre format                      | N/A                     |
@@ -61,13 +65,6 @@ Incomplete patterns:
 | VSD        | Vibration data             | ✅     | ❌       | Controls when the controller should vibrate, maybe has relations to gimmicks  | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | XML        | eXtensible Markup Language | ✅     | ✅       | Developer left-overs, unused by the game                                      | Text editor             |
 | GAME_ID    | Save file format           | ✅     | ✅       | Checksums are just CRC-32/JAMCRC, primary at 0xC, secondary at 0x8            | [FSE](https://github.com/MarkusMaal/FlipnicSaveEditor)                     |
-| GAME_ID    | Game executable (footer)   | ❌     | ❌       | Some strings and memory addresses can be modified to change menu actions      | N/A                     |
+| GAME_ID    | Game executable (footer)   | 🚫     | 🚫       | Some strings and memory addresses can be modified to change menu actions      | N/A                     |
 
-
-
-Key:
-
-✅ Working  
-❌ Not working  
-⚠️️ Read notes  
-❔ Maybe done
+✅ Working&nbsp;&nbsp;&nbsp;&nbsp;❌ Not working&nbsp;&nbsp;&nbsp;&nbsp;⚠️️ Read notes&nbsp;&nbsp;&nbsp;&nbsp;🚫 Not applicable

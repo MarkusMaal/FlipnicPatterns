@@ -12,6 +12,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 * [msg.hexpat](patterns/msg.hexpat) - JA.MSG file (strings used by the game)
 * [pss.hexpat](patterns/pss.hexpat) - Custom .PSS container, which contains audio/video streams
 * [savefile.hexpat](patterns/savefile.hexpat) - Save file format
+* [scc.hexpat](patterns/scc.hexpat) - Microsoft SourceSafe Source Code Control files (VSSVER.SCC)
 * [sst.hexpat](patterns/sst.hexpat) - Stage definition files (.SST)
 * [tim2.hexpat](patterns/tim2.hexpat) - Texture files (.TM2)
 * [saveicon.hexpat](patterns/saveicon.hexpat) - Save file icon (FICON.ICO)
@@ -61,7 +62,7 @@ If you open a file with a known header, ImHex will automatically prompt you to a
 | PSS        | Interleaved audio/video    | ✅     | ⚠️       | Generation is only possible with a donor file and audio stutters              | [FBE](https://github.com/MarkusMaal/FlipnicBinExtractor)/[FFS](https://github.com/MarkusMaal/FlipnicFs)/[FFT](https://github.com/MarkusMaal/FlipnicFileTools)             |
 | PSS.INT    | Audio stream               | ✅     | ✅       | Stereo Sony ADPCM compressed audio stream (interleave 0x400)                  | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/[MFAudio](https://gamebanana.com/tools/6656)             |
 | PSS.IPU    | IPU video                  | ✅     | ✅       | Modified version of M2V for PlayStation 2                                     | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/[FFmpeg](https://ffmpeg.org)/ps2str       |
-| SCC        | ???                        | ❌     | ❌       | Maybe memory offsets? Also why do they all have the same name?                | N/A                     |
+| SCC        | Source Code Control files  | ❌     | ❌       | Development left-overs, unused by the game.                    | Microsoft Visual SourceSafe     |
 | SST        | Stage (special?) table     | ⚠️     | ❌       | Contains stuff like gimmicks, list of files and event system                  | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | SVAG       | Mono audio stream          | ✅     | ✅       | Sony ADPCM compressed again, but single audio channel this time               | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/[MFAudio](https://gamebanana.com/tools/6656)             |
 | TM2        | Texture image map 2 (TIM2) | ✅     | ✅       | Standard texture file for PlayStation 2 games                                 | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/XnViewMP/etc.       |

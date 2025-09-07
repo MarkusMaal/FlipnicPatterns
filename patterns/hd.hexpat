@@ -1,10 +1,15 @@
 // massive help on the Jam header format
 // https://raw.githubusercontent.com/Nenkai/GT-File-Specifications-Documentation/refs/heads/master/Formats/PS2/GT4/GT4_INST_SShd_Jam_Custom.bt
+//
+// more helpful information here as well (specifically the "VOICE HEADER (*.HD)" section)
+// https://psx-spx.consoledev.net/cdromfileformats/#cdrom-file-audio-other-formats
 
 #pragma author MarkusMaal
-#pragma description Flipnic/VAG audiobank header
+#pragma description Flipnic/VAB audiobank header
 #pragma magic [ 00 00 00 00 53 53 68 64 ] @ 0x08
 #pragma endian little
+
+#include <std/mem>
 
 struct _7bitVariable {
     u8 values[]; // In practice, keep reading until !(value & 0x80)
@@ -17,22 +22,30 @@ enum Flags : u8 {
     Reverb                        = 0x80,
 };
 
+bitfield JamFlags {
+    bool HighPriority: 1;
+    bool Noise: 1;
+    padding: 2;
+    bool PitchBend : 1;
+    bool Modulation : 1;
+    bool BreathWaveFromProg : 1;
+    bool Reverb : 1;
+};
+
 struct JamSplitChunk {
     u8 NoteMin [[color("FF00FF")]];
     u8 NoteMax [[color("FF00FF")]];
     u8 BaseNote [[color("FF00FF")]]; // smaller values = higher pitch
-    u8 Karaoke [[color("FF00FF")]];
+    s8 FineTunePitch [[color("FF00FF")]];
 
-    u8  SD_VA_SSA_hi;  // upper 8 bits
-    u16 SD_VA_SSA_lo;  // lower 16 bits
-
-    s16 SD_VP_ADSR1;
-    s16 SD_VP_ADSR2;
+    u16 SampleOffset [[color("00FF00")]];  // Offset of the sample divided by 8 relative to BD file (i.e. if the value here is 01 20, the offset would be 0x1008)
+    u32  AttackDecaySustainRelease;        // Envelope stuff here
+    u8 VolumeOverride [[color("00FFFF")]];
     u8  Volume [[color("00FFFF")]];
     u8  Pan [[color("00FFFF")]];
-    u8  UnkPitchRelated_0x0E;
-    u8  LfoTableIndex;
-    u8 Reverb;
+    u8  PitchBend;
+    u8  BreathWaveIdx;
+    JamFlags Flags [[color("202020")]];
 } [[color("00007F")]];
 
 
@@ -45,7 +58,7 @@ struct ProgChunk {
     u8 FlagBitAndCount [[color("FF0000")]];
     u8 BaseVolume [[color("F70000")]];
     u8 MaybePan [[color("EF0000")]];
-    u8 field_0x03 [[color("E70000")]];
+    padding[1];
     u8 UnkPitchRelated_0x04  [[color("DF0000")]];
     u8 LfoTableIndex  [[color("D70000")]];
     u8 StartNoteRange  [[color("CF0000")]];
@@ -84,23 +97,72 @@ struct EntryOffsets2 {
 };
 
 
-struct SeSeqChunk {
-    u16 LastIndex;
-    u16 DataOffsets[LastIndex + 1];
-
-    EntryOffsets2 EntryOffsets2[LastIndex + 1];
+struct SeProgChunk {
+    u8 FlagBitAndCount [[color("FF0000")]];
+    u8 BaseVolume [[color("F70000")]];
+    u8 MaybePan [[color("EF0000")]];
+    padding[1];
+    u8 UnkPitchRelated_0x04  [[color("DF0000")]];
+    u8 LfoTableIndex  [[color("D70000")]];
+    u8 StartNoteRange  [[color("CF0000")]];
+    u8 ProgramCount  [[color("C70000")]]; // seems to be count - 0x1F for some reason?
+    
+    JamSplitChunk chunks[ProgramCount - 0x1F];
 };
 
+struct Prog {
+    u16 EntryOffset;
+    SeProgChunk prg @ parent.RelativeStart + EntryOffset;
+};
 
 struct SeSeqProgChunk {
+    const u32 RelativeStart = $;
     u16 MaxIndex;
-    u16 EntryOffsets[MaxIndex + 1];
-
-    u8 unk[8];
+    Prog Entries[MaxIndex + 1];
 };
 
+struct Seq {
+    u16 SequenceOffset;
+    u8 SequenceData[while(std::mem::read_unsigned($, 3) != 0x2FFF)] @ parent.RelativeStart + SequenceOffset;
+};
+
+struct SeSeqEntrySequences {
+    const u32 RelativeStart = parent.RelativeStart;
+    u16 LastIndex;
+    Seq SequenceOffsets[LastIndex+1];
+};
+
+struct SeSeqEntry {
+    const u32 RelativeStart = parent.RelativeStart;
+    s16 DataOffset;
+    if (DataOffset != -1) {
+        SeSeqEntrySequences Sequences @ RelativeStart + DataOffset;
+    }
+};
+
+struct SeSeqChunk {
+    const u32 RelativeStart = $;
+    u16 LastIndex;
+    SeSeqEntry Entries[LastIndex + 1];
+};
+
+// wtf is this?
+// seems to always be 0x310 in length if it's in there
+// and the values are always identical
 struct UnkUnusedMaybeChunk {
-    u8 Unk;
+    u8 UnknownData[0x310];
+};
+
+
+struct BreathWave {
+    u8 BreathWaves[0x40];
+};
+
+struct BreathTableChunk {
+    const u32 RelativeStart = $;
+    u16 UpperBound;
+    u16 Offsets[UpperBound+1];
+    BreathWave BreathWaves[UpperBound+1];
 };
 
 
@@ -112,7 +174,7 @@ struct JamHeader {
 
     s32 ProgramChunkPhysicalOffset;
     s32 VelocityChunkPhysicalOffset;
-    s32 LfoTableChunkPhysicalOffset;
+    s32 BreathTableChunkPhysicalOffset;
     s32 SeSeqChunkPhysicalOffset;
     s32 UnkChunkPhysicalOffset;
     s32 SeProgChunkPhysicalOffset;
@@ -120,7 +182,7 @@ struct JamHeader {
 
     u32 ProgramChunkMemoryOffset;
     u32 VelocityChunkMemoryOffset;
-    u32 LfoTableChunkMemoryOffset;
+    u32 BreathTableChunkMemoryOffset;
     u32 SeSeqChunkMemoryOffset;
     u32 UnkChunkMemoryOffset;
     u32 SeProgChunkMemoryOffset;
@@ -133,6 +195,9 @@ struct JamHeader {
     }
     if (VelocityChunkPhysicalOffset != -1) {
         VelocityChunk VelocityChunk @ VelocityChunkPhysicalOffset;
+    }
+    if (BreathTableChunkPhysicalOffset != -1) {
+        BreathTableChunk BreathTableChunk @ BreathTableChunkPhysicalOffset;
     }
     if (SeSeqChunkPhysicalOffset != -1) {
         SeSeqChunk SeSeqChunk @ SeSeqChunkPhysicalOffset;

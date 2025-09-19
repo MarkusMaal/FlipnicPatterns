@@ -116,6 +116,27 @@ struct BallCounts {
     u32 Credits;
 };
 
+struct BossData {
+    const u32 Start = $;
+    char Model[while(std::mem::read_unsigned($,1) != 0x0)];
+    padding[while ($ < Start + 0x20)];
+    padding[0x34];
+    u32 Health;
+    padding[4];
+    u32 Timeout;
+    padding [0xC];
+    float Speed;
+    float MovementAreaScale;
+    padding[8];
+    float OffsetX;
+    padding[8];
+    float FiringDistance;
+    padding[8];
+    float FiringRadius;
+    padding [0xC];
+    float Scale;
+};
+
 enum GameEvent : u32 {
     Timer = 0x04,
     Respawn = 0x06,
@@ -131,6 +152,7 @@ enum SequenceEvent : u32 {
     ResetBgm,
     ScreenFade = 0x07,
     CameraSequence = 0x09,
+    SwitchArea,
     WonderfulSequence = 0x0D,
     GuideSfxEvent
 };
@@ -218,9 +240,20 @@ struct GimmickGeneric {
     padding[2];
 };
 
+enum BallEvent : u32 {
+    ToggleControl = 0x02,
+    LightRedMissionHexagon = 0x14,
+};
+
 struct EffName {
     NameGeneric Name;
     u8 UnknownData[8];
+};
+
+enum FlashType : u32 {
+    Off,
+    Flashing,
+    FastFlashing
 };
 
 // Interactable element (flippers, slingshots, bumpers, etc.)
@@ -298,6 +331,9 @@ struct StageEvent {
         }  else if (EventType == 0x09) {
             s32 CameraId;
             padding[4];
+        } else if (EventType == 0xA) {
+            s32 AreaCode;
+            s32 Variation;
         } else if (EventType == 0x0D) {
             bool DisplayText;
             padding[7];
@@ -316,15 +352,21 @@ struct StageEvent {
         padding[0x10];
     } else if (EventLabel == "" && EventMagic == 0xC) {
         padding[4];
-        u32 EventType;
+        BallEvent EventType;
         if (EventType == 0x02) {
             u32 BallId;
             BallMode BallMode;
+            padding[0x10];
+        } else if (EventType == 0x14) {
+            u32 AreaCode;
+            u32 RedHexagonObjectId;
+            FlashType FlashType;
+            padding[0xC];
         } else {
             u32 GenericId;
             u32 GenericValue;
+            padding[0x10];
         }
-        padding[0x10];
     } else if (EventLabel == "" && EventMagic == 0xA) {
         padding[4];
         TextEvent EventType;
@@ -353,6 +395,8 @@ struct Subentry {
         bool Mirror;
     } else if (parent.EntryLabel == "EVENT") {
         StageEvent StageEvent;
+    } else if (parent.EntryLabel == "BOSS_CAS") {
+        BossData BossData;
     } else if (parent.EntryLabel == "VABN") {
         VabName VabName;
     } else if (parent.EntryLabel == "EFFN") {

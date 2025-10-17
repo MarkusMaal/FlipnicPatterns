@@ -4,7 +4,6 @@ u32 MagicOffset = std::mem::size() - 0x30;
 
 #pragma author MarkusMaal
 #pragma description Flipnic/LP4 files
-#pragma magic [ 00 00 00 00 83 74 83 40 83 43 83 8B 83 49 81 5B 83 76 83 93 82 C9 8E B8 94 73 82 B5 82 DC 82 B5 ] @ std::mem::size() - 0x30
 #pragma endian little
 
 

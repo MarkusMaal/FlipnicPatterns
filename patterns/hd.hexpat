@@ -5,7 +5,7 @@
 // https://psx-spx.consoledev.net/cdromfileformats/#cdrom-file-audio-other-formats
 
 #pragma author MarkusMaal
-#pragma description Flipnic/VAB audiobank header
+#pragma description SCEI/JAM voicebank header
 #pragma magic [ 00 00 00 00 53 53 68 64 ] @ 0x08
 #pragma endian little
 

@@ -23,6 +23,7 @@ Incomplete patterns:
 
 * [col.hexpat](patterns/col.hexpat) - Collision maps (.COL)
 * [fpd.hexpat](patterns/fpd.hexpat) - Object movement data (.FPD)
+* [ftl.hexpat](patterns/ftl.hexpat) - Texture list (.FTL)
 * [mlb.hexpat](patterns/mlb.hexpat) - Layout for various in-game menus (.MLB)
 * [lay.hexpat](patterns/lay.hexpat) - The game uses these files to find where things are on the stage, as well as scaling and skew effects (.LAY)
 * [lp4.hexpat](patterns/lp4.hexpat) - Game resource file (usually 3D models and 2D text animations)
@@ -50,7 +51,8 @@ If you open a file with a known header, ImHex will automatically prompt you to a
 | COL        | Collision maps             | ❌     | ❌       | Appears to have similar structure to LP4 files                                                            | N/A                     |
 | CSV        | Comma seperated values     | ✅     | ✅       | Development left-overs, unused by the game                                                                | Text editor/spreadsheet |
 | FPC        | Camera sequences           | ✅     | ❌       | Can also contain camera animations                                                                        | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
-| FPD        | Model movement sequences   | ❌     | ❌       | Looks similar to FPC, maybe next one to figure out?                                                       | N/A                     |
+| FPD        | Model movement sequences   | ⚠️     | ❌       | Partial decoding in a pre-release version of FFT                                                          | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
+| FTL        | (Font?) texture lists      | ❌     | ❌       | Stores a list of textures for fonts, similar to FTEXLIST.TXT, but in a binary format                      | N/A                     |
 | HD/BD      | VAB soundbank files        | ⚠️     | ❌       | Proprietary soundbank format (JAM) used by some first-party PS1/PS2 games. SFX decoding not possible yet. | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | ICO        | Save file icon             | ✅     | ✅       | Apparently a standard format                                                                              | [PS2 Save Builder](https://www.ps2savetools.com/download/ps2-save-builder/)/[ps2iconsys](https://github.com/ticky/ps2iconsys.git)   |
 | LAY        | Layout files               | ⚠️     | ❌       | Defines where the various objects on the stage are located. Some decoding is possible, but unreliable.    | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |

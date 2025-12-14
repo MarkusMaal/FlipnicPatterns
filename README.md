@@ -9,7 +9,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 * [folder.hexpat](patterns/folder.hexpat) - Subfolders in .BIN blob files [VFS support]
 * [fpc.hexpat](patterns/fpc.hexpat) - Camera sequences (.FPC)
 * [hd.hexpat](patterns/hd.hexpat) - Soundbank (VAB) header file
-* [ipu.hexpat](patterns/ipu.hexpat) - While Flipnic uses .IPU files, which are found in many PS2 games, it has made a few modifications to header and footer, which can be seen with this pattern file
+* [ipu.hexpat](patterns/ipu.hexpat) - Flipnic uses IPU video streams, which can be extracted by demuxing the .PSS file
 * [msg.hexpat](patterns/msg.hexpat) - JA.MSG file (strings used by the game)
 * [pss.hexpat](patterns/pss.hexpat) - Custom .PSS container, which contains audio/video streams
 * [savefile.hexpat](patterns/savefile.hexpat) - Save file format

@@ -434,6 +434,20 @@ struct StageEvent {
     u8 UnknownData[0x20];
 };
 
+struct FpbHeader {
+    u32 Entries;
+    u32 FirstEntryOffset;
+    u32 TOCLength;
+};
+
+struct FpbTOCEntry {
+    u32 Length;
+    u32 Offset;
+    u32 Size;
+    char Label[Length - 0xC];
+    u8 UnknownData[Size] @ parent.Start + Offset;
+};
+
 // Definitions for SST element
 struct Subentry {
     if (parent.EntryLabel == "DRAWD") {
@@ -470,6 +484,14 @@ struct Subentry {
     } else if (parent.EntryLabel == "BALLD") {
         float Gravity;
         padding[0x1C];
+    } else if (parent.EntryLabel == "FLIESFPB") {
+        // animation related data for the stick figure in Zero Gravity mission
+        // will t-pose if you remove this section
+        u32 Start = $;
+        char Magic[3];
+        padding[0xD];
+        FpbHeader Header;
+        FpbTOCEntry Entries[Header.Entries] @ Start + Header.FirstEntryOffset;
     } else if (std::string::substr(parent.EntryLabel, 0, 3) == "GMK") {
         Gimmick Gimmick;
     }

@@ -274,6 +274,52 @@ struct Gimmick {
     }
 };
 
+// Examples:
+// +------------+--------------------------------------------------------------------+
+// | Binary/hex | Result                                                             |
+// +------------+--------------------------------------------------------------------+
+// | 0000b (0h) | Target on the ball, origin is static (puking simulator)            |
+// | 0111b (7h) | Camera is static (uses values from FPC file)                       |
+// | 0101b (5h) | Camera is static except when moving up/down (e.g. zero gravity)    |
+// | 1000b (8h) | Camera is anchored to ball position (e.g. bumper area in optics)   |
+// | 1011b (Bh) | Follows the ball along the X-axis (e.g. starting area in geometry) |
+// +------------+--------------------------------------------------------------------+
+bitfield CameraFlags {
+    bool LockZAxis : 1; // if any of these are False, gets the target
+    bool LockYAxis : 1; // value for specific axis from current ball
+    bool LockXAxis : 1; // position instead of FPC file
+    bool AnchorToTarget : 1; // if True, the origin gets anchored to ball position
+    padding : 4;
+};
+
+// camera data? camera dynamics?
+struct CamD {
+    // should be in ascending order, if it isn't, the game automatically changes the order of entries
+    // while loading the stage
+    // every value **must** be unique, else the game crashes
+    u32 Id [[color("0000c7")]];
+    
+    // LOD stands for level of detail, toggles whether to show low detailed version of the stage
+    // around the current area (how far you can see with freecam depends on what DRAWD is set to)
+    // or hide everything except the current area.
+    u32 LodFlags [[color("00aa00")]];
+    u32 Unk1 [[color("00aa22")]]; // maybe LOD related?
+    u32 Unk2 [[color("22aa44")]];
+    u32 Unk3 [[color("44aa66")]];
+    padding[4];
+    CameraFlags CameraProps [[color("cc00cc")]]; // see CameraFlags above
+    padding[3];
+    // which camera to get the values from (index of CAMN list)
+    u32 CameraSource [[color("00aacc")]];
+    padding[4];
+    // <0.0 - flickers really fast, never resolves the target
+    // =0.0 - camera instantly locks onto target on any given frame
+    // >0.0 - camera moves slower towards the target (looks smoother)
+    float StiffnessX [[color("990000")]];
+    float StiffnessY [[color("cc3300")]];
+    float StiffnessZ [[color("999900")]];
+};
+
 // Event system
 struct StageEvent {
     const u32 Start = $;
@@ -413,6 +459,8 @@ struct Subentry {
         NameGeneric SkyName;
     } else if (parent.EntryLabel == "CAMN") {
         NameGeneric Camera;
+    } else if (parent.EntryLabel == "CAMD") {
+        CamD CameraData;
     } else if (parent.EntryLabel == "LIGHTN") {
         NameGeneric Light;
     } else if (parent.EntryLabel == "PATHN") {

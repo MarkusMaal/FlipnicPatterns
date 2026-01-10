@@ -467,6 +467,9 @@ struct Subentry {
         NameGeneric Path;
     } else if (parent.EntryLabel == "PLIGHT") {
         SpecularLevels SpecularLevels;
+    } else if (parent.EntryLabel == "BALLD") {
+        float Gravity;
+        padding[0x1C];
     } else if (std::string::substr(parent.EntryLabel, 0, 3) == "GMK") {
         Gimmick Gimmick;
     }

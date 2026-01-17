@@ -377,6 +377,12 @@ struct StageEvent {
         u32 FontSource;
         u32 AnimatedFontSource;
         padding[8];
+    } else if (EventLabel == "COMET_MULTI_BALL" && EventMagic == 0x9) {
+        padding[4];
+        u32 Enable;
+        u32 MaxBalls;
+        u64 Unknown;
+        padding[12];
     } else if (EventLabel == "" && EventMagic == 0x9) {
         padding[4];
         GameEvent EventType;
@@ -480,6 +486,10 @@ struct StageEvent {
         } else if (EventLabel == "VOICE") {
             u32 GuidanceVoiceSfxId[5];
             padding[8];
+        } else if (EventLabel == "COMET") {
+            padding[4];
+            u32 ObjectId;
+            padding[20];
         } else {
             u32 Flag;
             if (Flag == 0x16) {

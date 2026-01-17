@@ -243,6 +243,7 @@ struct GimmickGeneric {
 enum BallEvent : u32 {
     ToggleControl = 0x02,
     LightRedMissionHexagon = 0x14,
+    ToggleGate = 0x19
 };
 
 struct EffName {
@@ -254,6 +255,14 @@ enum FlashType : u32 {
     Off,
     Flashing,
     FastFlashing
+};
+
+
+enum GateState : u32 {
+    Open,
+    Spring,
+    Open = 0xA,
+    Blocked
 };
 
 // Interactable element (flippers, slingshots, bumpers, etc.)
@@ -403,7 +412,7 @@ struct StageEvent {
             padding[7];
         } else if ((EventType == 0x01) || (EventType == 0x02) || (EventType == 0x0E)) {
             s32 SoundId;
-            padding[4];
+            s32 BgmId;
         }  else if (EventType == 0x0) {
             s32 FmvId;
             bool Randomize;
@@ -429,7 +438,16 @@ struct StageEvent {
         } else {
             u32 GenericId;
             u32 GenericValue;
-            padding[0x10];
+            if (GenericValue == 0xA) {
+                $ -= 12;
+                u32 AreaId;
+                u32 GateId;
+                u32 EventMagic;
+                GateState GateState;
+                $ += 12;
+            } else {
+                padding[0x10];
+            }
         }
     } else if (EventLabel == "" && EventMagic == 0xA) {
         padding[4];
@@ -448,18 +466,28 @@ struct StageEvent {
         $ += 0x1C;
         padding[0x20] [[comment("End of event section")]];
     } else if (EventMagic == 0x6) {
-        padding[4];
-        u32 Flag;
-        if (Flag == 0x16) {
-            u32 MaybeConditionFlag;
-            u32 MaybeEntranceAnimationTrigger;
-            u32 AnimationId;
-            padding[0xC];
-        } else if (Flag == 0x15 && EventLabel == "DEATH") {
-            u32 OutholeTriggerObjectId;
+        if (EventLabel == "POINT") {
+            padding[4];
+            u32 BonusPoints[7];
+        } else if (EventLabel == "TARGET") {
+            padding[4];
+            u32 BingoCheckEnable;
+            u32 ObjectId;
             padding[0x14];
         } else {
-            padding[0x18];
+            padding[4];
+            u32 Flag;
+            if (Flag == 0x16) {
+                u32 MaybeConditionFlag;
+                u32 MaybeEntranceAnimationTrigger;
+                u32 AnimationId;
+                padding[0xC];
+            } else if (Flag == 0x15 && EventLabel == "DEATH") {
+                u32 OutholeTriggerObjectId;
+                padding[0x14];
+            } else {
+                padding[0x18];
+            }
         }
     }
     else

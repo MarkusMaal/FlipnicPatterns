@@ -350,6 +350,14 @@ struct StageEvent {
         u32 EntranceAnimationId;
         u32 ExitAnimationId;
         padding[0x4];
+    } else if (EventLabel == "TIMER_EVENT" && EventMagic == 0x9) {
+        padding[4];
+        u32 TimerEventFlag;
+        u32 TimerFrameCount;
+        u32 GracePerioudFrameCount;
+        u32 FontSource;
+        u32 AnimatedFontSource;
+        padding[8];
     } else if (EventLabel == "" && EventMagic == 0x9) {
         padding[4];
         GameEvent EventType;

@@ -466,16 +466,21 @@ struct StageEvent {
         $ += 0x1C;
         padding[0x20] [[comment("End of event section")]];
     } else if (EventMagic == 0x6) {
+        padding[4];
         if (EventLabel == "POINT") {
-            padding[4];
             u32 BonusPoints[7];
         } else if (EventLabel == "TARGET") {
-            padding[4];
-            u32 BingoCheckEnable;
+            u32 TargetType;
             u32 ObjectId;
             padding[0x14];
+        } else if (EventLabel == "PLAYER") {
+            u32 ControlFlag;
+            u32 ControllableObjectId;
+            padding[0x14];
+        } else if (EventLabel == "VOICE") {
+            u32 GuidanceVoiceSfxId[5];
+            padding[8];
         } else {
-            padding[4];
             u32 Flag;
             if (Flag == 0x16) {
                 u32 MaybeConditionFlag;

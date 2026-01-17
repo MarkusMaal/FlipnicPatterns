@@ -350,6 +350,16 @@ struct StageEvent {
         u32 EntranceAnimationId;
         u32 ExitAnimationId;
         padding[0x4];
+    } else if (EventLabel == "SMART_BALL" && EventMagic == 0x9) {
+        padding[4];
+        u32 EventFlag;
+        u32 AreaId1;
+        u32 AreaId2;
+        u32 Balls;
+        u8 BuzzerSoundEffectId;
+        u16 Unknown; // related to buzzer sound?
+        padding[1];
+        u64 Unknown2; // honestly no idea
     } else if (EventLabel == "TIMER_EVENT" && EventMagic == 0x9) {
         padding[4];
         u32 TimerEventFlag;
@@ -437,6 +447,20 @@ struct StageEvent {
         s32 EndEvent;
         $ += 0x1C;
         padding[0x20] [[comment("End of event section")]];
+    } else if (EventMagic == 0x6) {
+        padding[4];
+        u32 Flag;
+        if (Flag == 0x16) {
+            u32 MaybeConditionFlag;
+            u32 MaybeEntranceAnimationTrigger;
+            u32 AnimationId;
+            padding[0xC];
+        } else if (Flag == 0x15 && EventLabel == "DEATH") {
+            u32 OutholeTriggerObjectId;
+            padding[0x14];
+        } else {
+            padding[0x18];
+        }
     }
     else
     u8 UnknownData[0x20];

@@ -567,6 +567,8 @@ struct Subentry {
         BallName BallName;
     } else if (parent.EntryLabel == "SKYN") {
         NameGeneric SkyName;
+    } else if (parent.EntryLabel == "STGNAME") {
+        NameGeneric SkyName;
     } else if (parent.EntryLabel == "CAMN") {
         NameGeneric Camera;
     } else if (parent.EntryLabel == "CAMD") {

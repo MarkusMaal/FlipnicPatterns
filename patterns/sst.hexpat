@@ -154,7 +154,8 @@ enum SequenceEvent : u32 {
     CameraSequence = 0x09,
     SwitchArea,
     WonderfulSequence = 0x0D,
-    GuideSfxEvent
+    GuideSfxEvent,
+    ReducedFramerate = 0x15
 };
 
 // Completed is the same as StartedCompleted
@@ -523,11 +524,31 @@ struct FpbTOCEntry {
     u8 UnknownData[Size] @ parent.Start + Offset;
 };
 
+struct EvtInfEntry {
+    u32 StageIndex;
+    bool IsRedMission;
+    padding[1];
+    u8 MissionImageIdx;
+    u8 MissionSubPageCount;
+    u32 MessageIndex;
+};
+
+struct StgInfEntry {
+    u32 Start = $;
+    char StageName[while(std::mem::read_unsigned($,1) != 0x0)];
+    padding[while ($ < Start + 0x20)];
+    u32 StageIndex;
+};
+
 // Definitions for SST element
 struct Subentry {
     if (parent.EntryLabel == "DRAWD") {
         float DrawDistance;
         bool Mirror;
+    } else if (parent.EntryLabel == "EVTINF") {
+        EvtInfEntry EventInfo;
+    } else if (parent.EntryLabel == "STGINF") {
+        StgInfEntry StageInfo;
     } else if (parent.EntryLabel == "EVENT") {
         StageEvent StageEvent;
     } else if (parent.EntryLabel == "BOSS_CAS") {

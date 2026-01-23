@@ -126,11 +126,9 @@ struct NextSection {
 };
 
 struct Body {
-    if (parent.hasEmbeddedResources) {
-        Vec4 LightMap[8];
-    }
     DataEntry DataStart;
-    NextSection Next[parent.modelCount];
+    NextSection Next[ModelCount];
+    //Body Body;
     //LayoutHeader Header;
 };
 
@@ -140,19 +138,27 @@ struct Header {
     padding[4];
     u32 additionalParamCount;
     padding[1];
-    bool hasEmbeddedResources;
+    bool HasEmbeddedResources;
     padding[1];
     bool is2dAnimation;
     float reserved;
     padding[8];
     AdditionalParams additionalParams[additionalParamCount];
-    Body Body;
+    u32 EndHeader = $;
+    bool HasBoundingBox = HasEmbeddedResources;
 };
 
 struct Sect {
     u8 SectionData[0x2B0];
 } [[same_color]];
 
+struct BoundingBox {
+    Vec4 BoundingBox[8];
+};
+
 
 Header Header @ 0x00;
+BoundingBox BoundingBox[Header.HasBoundingBox] @ Header.EndHeader;
+u32 ModelCount = Header.modelCount;
+Body Body @ $;
 u8 Magic[0x1c] @ MagicOffset+4;

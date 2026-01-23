@@ -1,7 +1,5 @@
 #include <std/mem>
 
-u32 MagicOffset = std::mem::size() - 0x30;
-
 #pragma author MarkusMaal
 #pragma description Flipnic/LP4 files
 #pragma endian little
@@ -107,29 +105,51 @@ struct AdditionalParams {
     u32 p4;
 };
 
+struct VecHf4 {
+    s16 X;
+    s16 Y;
+    s16 Z;
+    padding[2];
+} [[single_color]];
+
+struct TextureCoordinate {
+    s16 X [[color("aa0000")]]; // half float
+    s16 Y [[color("0000aa")]]; // half float
+    s16 Divider [[color("00aa00")]];
+    s16 Unknown [[color("aa00aa")]];
+};
+
 
 struct NextSection {
     u32 TestVariable1 [[hidden]];
     u32 TestVariable2 [[hidden]];
+    u32 TestVariable3 @ $ + 0x1C [[hidden]];
     $ -= 8;
     if ((TestVariable1 == 0) && (TestVariable2 == 0)) {
         Vec4 SectionFooter[8];
         NextSection Ns;
     } else if ((TestVariable1 == TestVariable2) && (TestVariable1 == 1)) {
+        u32 AdditionalPointsCount @ $ + 0x18;
         padding[0x20];
-        s32 KeyframeCount;
-        padding[0xC];
-        Vec4 Keyframes[KeyframeCount];
+        Vec4 AdditionalPoints[AdditionalPointsCount];
+        s32 KeyframeOrPointsCount;
+        s32 TextureUVCount;
+        padding[4];
+        s32 NormalCount;
+        Vec4 Keyframes[KeyframeOrPointsCount];
+        VecHf4 Normals[NormalCount];
+        TextureCoordinate TextureUVs[TextureUVCount];
+        padding[0xB0];
     } else if ((TestVariable1 == 0) && (TestVariable2 == 1)) {
         DataEntry Data;
+    } else {
+        Vec4 UnknownPoints[8];
     }
 };
 
 struct Body {
     DataEntry DataStart;
     NextSection Next[ModelCount];
-    //Body Body;
-    //LayoutHeader Header;
 };
 
 struct Header {
@@ -160,5 +180,4 @@ struct BoundingBox {
 Header Header @ 0x00;
 BoundingBox BoundingBox[Header.HasBoundingBox] @ Header.EndHeader;
 u32 ModelCount = Header.modelCount;
-Body Body @ $;
-u8 Magic[0x1c] @ MagicOffset+4;
+Body Body[while(!std::mem::eof())] @ $;

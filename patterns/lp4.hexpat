@@ -133,9 +133,9 @@ struct NextSection {
         padding[0x20];
         Vec4 AdditionalPoints[AdditionalPointsCount];
         s32 KeyframeOrPointsCount;
-        s32 TextureUVCount;
-        padding[4];
         s32 NormalCount;
+        padding[4];
+        s32 TextureUVCount;
         Vec4 Keyframes[KeyframeOrPointsCount];
         VecHf4 Normals[NormalCount];
         TextureCoordinate TextureUVs[TextureUVCount];

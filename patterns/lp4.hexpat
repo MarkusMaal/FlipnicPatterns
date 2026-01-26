@@ -116,7 +116,12 @@ struct TextureCoordinate {
     s16 X [[color("aa0000")]]; // half float
     s16 Y [[color("0000aa")]]; // half float
     s16 Divider [[color("00aa00")]];
-    s16 Unknown [[color("aa00aa")]];
+    
+    // These allow some 3D-models to take up way less space
+    // by having the next point be connected to 1 or 2 previous
+    // points instead of repeating their coordinates (a poor man's
+    // run length encoding sort of).
+    s16 VertexFlags [[color("aa00aa")]];
 };
 
 

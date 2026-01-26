@@ -79,7 +79,7 @@ struct LayoutEntry {
         AdditionalData AdditionalData[AdditionalDataLength];
     }
     Triplet Keyframes[KeyframeCount];
-    Vec4 AdditionalData2[KeyframeCount];
+    //Vec4 AdditionalData2[KeyframeCount];
 };
 
 struct DataEntry {
@@ -134,12 +134,14 @@ struct NextSection {
         Vec4 AdditionalPoints[AdditionalPointsCount];
         s32 KeyframeOrPointsCount;
         s32 NormalCount;
-        padding[4];
+        s32 UnknownCount;
         s32 TextureUVCount;
         Vec4 Keyframes[KeyframeOrPointsCount];
         VecHf4 Normals[NormalCount];
         TextureCoordinate TextureUVs[TextureUVCount];
-        padding[0xB0];
+        float Unknown[UnknownCount];
+        padding[0x80];
+        s8 TextureSection[0x30];
     } else if ((TestVariable1 == 0) && (TestVariable2 == 1)) {
         DataEntry Data;
     } else {

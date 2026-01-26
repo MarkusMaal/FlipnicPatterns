@@ -71,6 +71,6 @@ If you open a file with a known header, ImHex will automatically prompt you to a
 | VSD        | Vibration data             | ✅     | ❌       | Controls when the controller should vibrate, maybe has relations to gimmicks                                                                     | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | XML        | eXtensible Markup Language | ✅     | ✅       | Developer left-overs, unused by the game                                                                                                         | Text editor             |
 | GAME_ID    | Save file format           | ✅     | ✅       | Checksums are just CRC-32/JAMCRC, primary at 0xC, secondary at 0x8                                                                               | [FSE](https://github.com/MarkusMaal/FlipnicSaveEditor)                     |
-| GAME_ID    | Game executable (footer)   | 🚫     | 🚫       | Some strings and memory addresses can be modified to change menu actions                                                                         | N/A                     |
+| GAME_ID    | Game executable (footer)   | 🚫     | 🚫       | Some strings and memory addresses can be modified to change menu actions (see [FlipnicDecomp](https://github.com/MarkusMaal/FlipnicDecomp))                                                     | N/A                     |
 
 ✅ Working&nbsp;&nbsp;&nbsp;&nbsp;❌ Not working&nbsp;&nbsp;&nbsp;&nbsp;⚠️️ Read notes&nbsp;&nbsp;&nbsp;&nbsp;🚫 Not applicable

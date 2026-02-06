@@ -17,6 +17,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 * [sst.hexpat](patterns/sst.hexpat) - Stage definition files (.SST)
 * [tim2.hexpat](patterns/tim2.hexpat) - Texture files (.TM2)
 * [saveicon.hexpat](patterns/saveicon.hexpat) - Save file icon (FICON.ICO)
+* [lit.hexpat](patterns/lit.hexpat) - Environment lighting table (.LIT)
 * [vsd.hexpat](patterns/vsd.hexpat) - Vibration strength data (.VSD)
 
 Incomplete patterns:
@@ -56,7 +57,7 @@ If you open a file with a known header, ImHex will automatically prompt you to a
 | HD/BD      | VAB soundbank files        | ⚠️     | ❌       | Proprietary soundbank format (JAM) used by some first-party PS1/PS2 games. SFX decoding not possible yet.                                        | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | ICO        | Save file icon             | ✅     | ✅       | Apparently a standard format                                                                                                                     | [PS2 Save Builder](https://www.ps2savetools.com/download/ps2-save-builder/)/[ps2iconsys](https://github.com/ticky/ps2iconsys.git)   |
 | LAY        | Layout files               | ⚠️     | ❌       | Defines where the various objects on the stage are located. Some decoding is possible, but unreliable.                                           | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
-| LIT        | Light tables               | ❌     | ❌       | Controls how the stage is lit                                                                                                                    | N/A                     |
+| LIT        | Light tables               | ✅     | ❌       | Controls how the stage is lit                                                                                                                    | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | LP4        | 3D model files             | ⚠️     | ❌       | Binary format, supports UV maps, vertex point compression, static animations, bounding box and more. Decoding is possible, but unreliable.       | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |
 | MID        | MIDI sequences             | ✅     | ✅       | Just general MIDI played on specific channels specified by .HD/.BD files                                                                         | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)/Midi sequencers     |
 | MLB        | Menu layout (binary?)      | ✅     | ❌       | Used to stitch various textures together to create a menu interface                                                                              | [FFT](https://github.com/MarkusMaal/FlipnicFileTools)                     |

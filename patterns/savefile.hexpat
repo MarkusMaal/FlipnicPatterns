@@ -10,13 +10,18 @@
 struct PrimaryData {
     u8 Data[0x2770];
 };
+struct SecondaryData {
+    u8 Data[0x2774];
+};
 
+u8 HeaderPadding[8] @ 0x00;
 PrimaryData pD @ 0x10 [[hidden]];
-u32 CalculatedCRC32 = std::hash::crc32(pD, 0xFFFFFFFF, 0x4C11DB7, 0x0, true, true) [[export]];
-
-u64 Magic @ 0x00;
+SecondaryData sD @ 0xC [[hidden]];
 u32 SecondaryCRC32 @ 0x08 [[name("Secondary checksum (CRC32)")]];
+u32 CalculatedSecondaryCRC32 = std::hash::crc32(sD, 0xFFFFFFFF, 0x4C11DB7, 0x0, true, true) [[export, highlight_hidden, name("Secondary checksum (CRC32/Calculated)")]];
 u32 PrimaryCRC32 @ 0x0C [[name("Primary checksum (CRC32)")]];
+u32 CalculatedCRC32 = std::hash::crc32(pD, 0xFFFFFFFF, 0x4C11DB7, 0x0, true, true) [[export, highlight_hidden, name("Primary checksum (CRC32/Calculated)")]];
+bool IsChecksumValid = PrimaryCRC32 == CalculatedCRC32 && SecondaryCRC32 == CalculatedSecondaryCRC32 [[export, highlight_hidden, name("Are checksum valid?")]];
 s64 Score @ 0x28;
 u32 Combos @ 0x34;
 u32 OriginalGameStage @ 0x10C8 [[name("Original game stage")]];
@@ -154,7 +159,7 @@ struct ScoreRow {
     Difficulty Difficulty;
     u32 Combos;
     String InitialsArea [[name("Initials (reserved area)")]];
-    padding[4];
+    u32 PasswordFlags [[name("Password flags")]];
     u32 DefaultScore [[name("Default score")]];
 };
 

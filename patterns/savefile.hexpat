@@ -159,6 +159,9 @@ struct ScoreRow {
     Difficulty Difficulty;
     u32 Combos;
     String InitialsArea [[name("Initials (reserved area)")]];
+    // this data is normally unused, however it is taken into account
+    // when the game calculates a password if you press SELECT on the
+    // high scores screen
     u32 PasswordFlags [[name("Password flags")]];
     u32 DefaultScore [[name("Default score")]];
 };

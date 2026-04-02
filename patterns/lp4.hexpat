@@ -74,11 +74,35 @@ struct Triplet {
     float W3;
 } [[single_color]];
 
+
+struct FontAnimationSequenceFrame {
+    float Sx [[color("aa0000")]]; // scaling in each direction (only X and Y matter here)
+    float Sy [[color("00aa00")]];
+    float Sz [[color("0000aa")]];
+    float Sw [[color("aaaaaa")]];
+    float Unk1; // changes the vertical position of the shadow?
+    float Unk2; // something to do with rotation?
+    float Unk3;
+    float Unk4 [[color("aaaaaa")]];
+    float X [[color("aaaa00")]]; // position of the character (only X and Y matter here)
+    float Y [[color("aa00aa")]];
+    float Z [[color("00aaaa")]];
+    float W [[color("aaaaaa")]];
+} [[color("444444")]];
+
+struct FontAnimationAlphaSequenceFrame {
+    float Unk1 [[color("111111")]];
+    float Unk2 [[color("111111")]];
+    float Unk3 [[color("111111")]];
+    float Alpha [[color("888888")]]; // opacity of the character (0 = transparent/1 = opaque)
+};
+
 struct LayoutEntry {
     s32 KeyframeCount;
     bool IsAnimated;
-    padding[0xb];
-    padding[4];
+    padding[7];
+    bool HasAlphaSequence;
+    padding[7];
     s32 JointCount;
     padding[8];
     bool HasLightmapData;
@@ -103,6 +127,8 @@ struct LayoutEntry {
     float PositionZ;
     float ForceCorrection;
     padding[0x10];
+    FontAnimationSequenceFrame FontFrames[IsAnimated ? KeyframeCount : 0];
+    FontAnimationAlphaSequenceFrame FontAlphaFrames[HasAlphaSequence ? KeyframeCount : 0] [[single_color]];
     JointDefinition Joints[JointCount];
     LightData Lights[HasLightmapData ? AdditionalDataLength : 0];
     //Triplet Keyframes[KeyframeCount];

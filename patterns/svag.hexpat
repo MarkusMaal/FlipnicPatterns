@@ -27,8 +27,8 @@ struct AudioBlock {
 };
 
 struct StereoBlock {
-    AudioBlock ChannelL[0x20] [[color("000088")]];
-    AudioBlock ChannelR[0x20] [[color("880088")]];
+    AudioBlock ChannelL[0x40] [[color("000088")]];
+    AudioBlock ChannelR[0x40] [[color("880088")]];
 };
 
 bool isStereo = true;

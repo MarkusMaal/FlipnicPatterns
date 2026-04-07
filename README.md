@@ -15,6 +15,7 @@ This is a part of the Flipnic extraction project, where we try to understand as 
 * [savefile.hexpat](patterns/savefile.hexpat) - Save file format
 * [scc.hexpat](patterns/scc.hexpat) - Microsoft SourceSafe Source Code Control files (VSSVER.SCC)
 * [sst.hexpat](patterns/sst.hexpat) - Stage definition files (.SST)
+* [svag.hexpat](patterns/svag.hexpat) - Sony ADPCM Compressed Audio (.SVAG/.INT)
 * [tim2.hexpat](patterns/tim2.hexpat) - Texture files (.TM2)
 * [saveicon.hexpat](patterns/saveicon.hexpat) - Save file icon (FICON.ICO)
 * [lit.hexpat](patterns/lit.hexpat) - Environment lighting table (.LIT)

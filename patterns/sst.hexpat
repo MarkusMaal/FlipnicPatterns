@@ -540,6 +540,34 @@ struct StgInfEntry {
     u32 StageIndex;
 };
 
+// in some cases, we may want to teleport to a nearby area instead of
+// respawning at the current area, since technically not every area
+// contains a respawn points
+//
+// secondary respawn maybe used in some cases if the spawn point can
+// vary on the same area (e.g. optics multiball)
+//
+// the "current area on the table" in retroachievements code notes
+// is in fact the camera index and not the area index (notice how
+// the index is always below the number of labels in KUIDX)
+struct Respawns {
+    u16 AreaId [[color("880000")]];
+    u16 RespawnAreaId [[color("008888")]];
+    u16 SecondaryRespawnAreaId [[color("008800")]];
+    padding[2];
+};
+
+// which areas should be visible with specific camera indices
+struct AreaToggles {
+    u64 End = $ + 0x20;
+    float RenderDistanceX [[color("880088")]];
+    float RenderDistanceZ [[color("440088")]];
+    u8 CameraIndex [[color("008888")]];
+    u8 VisibleAreaIndices[while(std::mem::read_unsigned($,1) != 0xFF)] [[color("000000")]];
+    u8 Delimiter [[color("444444")]];
+    padding[while($ < End)];
+};
+
 // Definitions for SST element
 struct Subentry {
     if (parent.EntryLabel == "DRAWD") {
@@ -579,6 +607,12 @@ struct Subentry {
         NameGeneric Path;
     } else if (parent.EntryLabel == "PLIGHT") {
         SpecularLevels SpecularLevels;
+    } else if (parent.EntryLabel == "REBIRTH") {
+        Respawns BallRespawns;
+    } else if (parent.EntryLabel == "KUIDX") {
+        NameGeneric AreaLabel;
+    } else if (parent.EntryLabel == "CAMKUD") {
+        AreaToggles CameraAreas;
     } else if (parent.EntryLabel == "BALLD") {
         float Gravity;
         padding[0x1C];

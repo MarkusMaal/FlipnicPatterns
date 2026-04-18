@@ -79,8 +79,12 @@ struct IpuName {
     char LP4File[while(std::mem::read_unsigned($,1) != 0x0)];
     padding[while ($ < Start + 0x40)];
     FMVType FMVType;
-    u32 Unknown[3];
-    bool WhiteBackground;
+    // these are ignored if FMV type is low-res
+    u32 FadeInTime;
+    bool WhiteBackgroundFadeIn;
+    padding[3];
+    u32 FadeOutTime;
+    bool WhiteBackgroundFadeOut;
     padding[3];
 };
 
@@ -300,6 +304,16 @@ bitfield CameraFlags {
     bool LockXAxis : 1; // position instead of FPC file
     bool AnchorToTarget : 1; // if True, the origin gets anchored to ball position
     padding : 4;
+};
+
+// camera lane data? lane dynamics?
+struct CamLD {
+    u32 MainCameraId  [[color("aa4400")]]; // this is the camera the area uses normally when NOT traversing a lane
+    u32 Lane1CameraId [[color("448844")]]; // this is the camera when traversing the lane
+    u32 Lane2CameraId [[color("448844")]]; // same as Lane1CameraId, but generally corresponds to the right lane
+    float Smoothness1 [[color("004488")]]; // a smoothness multiplier to determine how long it takes for the camera to accelerate following the ball
+    float Smoothness2 [[color("004488")]];
+    u32 Unknown[5]    [[color("222222")]]; // no idea what these values are (potentially extra lane cameras if there are more than 2 lanes?)
 };
 
 // camera data? camera dynamics?
@@ -568,6 +582,32 @@ struct AreaToggles {
     padding[while($ < End)];
 };
 
+struct AreaInfo {
+    padding[0xE];
+    u16 EnabledSegments[0x9]; // only affects the segments where the ball is on, background elements are unaffected by this
+    float DiagonalFallFactor; // every table is tilted, this determines how tilted the table is (higher value = fall faster, negative = fall up)
+    padding[0x8];
+    float VerticalFallFactor; // used in special cases (e.g. loop the loop in optics)
+    padding[0x8];
+    bool DisableWallBounce;   // in some areas, the ball can bounce of the wall, this flag disables that feature
+    padding[6];
+    u8 AreaType;              // possibly determines which function to run in the event script?
+    padding[0x10];
+};
+
+// SETBL = SETUP_BALL? SETTINGS_BALL?
+struct BallSettings {
+    s8 SoundBankSectionId [[color("00aa00")]];
+    s8 SoundEffectId [[color("00aa00")]]; // somehow these two determine the specific sound to play
+    s8 VoiceBankId [[color("aa8800")]]; // 0 - MAIN.HD, 1 - SE_ST*.HD, -1 - none
+    s8 Unknown [[color("444444")]];
+    padding[4];
+    u8 Unknown2 [[color("444444")]];
+    padding[3];
+    s8 VibrationVsdIdx [[color("4400aa")]]; // Corresponds to an entry inside VIBRATION.VSD file
+    padding[3];
+};
+
 // Definitions for SST element
 struct Subentry {
     if (parent.EntryLabel == "DRAWD") {
@@ -601,6 +641,8 @@ struct Subentry {
         NameGeneric Camera;
     } else if (parent.EntryLabel == "CAMD") {
         CamD CameraData;
+    } else if (parent.EntryLabel == "CAMLD") {
+        CamLD CameraLaneData;
     } else if (parent.EntryLabel == "LIGHTN") {
         NameGeneric Light;
     } else if (parent.EntryLabel == "PATHN") {
@@ -613,6 +655,15 @@ struct Subentry {
         NameGeneric AreaLabel;
     } else if (parent.EntryLabel == "CAMKUD") {
         AreaToggles CameraAreas;
+    } else if (parent.EntryLabel == "SETBL") {
+        BallSettings BallSettings;
+    } else if (parent.EntryLabel == "KUINF") {
+        AreaInfo AreaInfo;
+    } else if (parent.EntryLabel == "SGKTBL") {
+        // enables the correct behaviour for ball saving bumpers,
+        // blue targets and ring plungers
+        u16 AreaId [[color("000088")]];
+        u16 GimmickId [[color("880088")]];
     } else if (parent.EntryLabel == "BALLD") {
         float Gravity;
         padding[0x1C];

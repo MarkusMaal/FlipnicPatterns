@@ -10,6 +10,7 @@
 char Magic[8] @ 0x00;
 u32 TOCEntriesCount @0x08;
 u32 TOCEndOffset @0x0C;
+str PreviousLabel = "";
 
 // LowRes - supports alpha channel, but is lower resolution and not interlaced
 // HiRes - does NOT support alpha, but higher resolution with interlacing
@@ -142,6 +143,7 @@ struct BossData {
 };
 
 enum GameEvent : u32 {
+    EventTrigger = 0x01,
     Timer = 0x04,
     Respawn = 0x06,
     Mission = 0x08
@@ -350,13 +352,25 @@ struct StageEvent {
     u32 EventMagic;
     char EventLabel[while(std::mem::read_unsigned($,1) != 0x0)];
     padding[while ($ < Start + 0x20)];
-    if (EventLabel == "START") {
-        padding[0x20];
+    if (EventLabel != "" && EventMagic == 0x00) {
+        u32 End = $ + 0x20;
+        padding[0x4];
+        u32 FuncArgs[while(std::mem::read_unsigned($,4) != 0x0)];
+        $ = End;
     } else if ((EventLabel == "GAME_EVENT") && (EventMagic == 0x09)) {
         padding[4];
-        bool RespawnBalls;
-        padding[3];
-        BallCounts BallCounts[3];
+        GameEvent EventType;
+        if (EventType == 1) {
+            BallCounts BallCounts[3];
+        } else {
+            padding[0x18];
+        }
+    } else if ((EventLabel == "COIN_CONBO") && (EventMagic == 0x09)) {
+        padding[4];
+        GameEvent EventType;
+        u32 FontIdx;
+        u32 MessageIdx;
+        padding[0x10];
     } else if (EventLabel == "FONT") {
         padding[4];
         FontTypes FontType;
@@ -488,7 +502,18 @@ struct StageEvent {
         padding[0x20] [[comment("End of event section")]];
     } else if (EventMagic == 0x6) {
         padding[4];
-        if (EventLabel == "POINT") {
+        if (PreviousLabel == "VOICE_EVENT") {
+            u32 VoiceIdx;
+            padding[0x18];
+        } else if (PreviousLabel == "LABEL_BUMPER") {
+            u32 AreaIdx;
+            u32 GimmickIdx;
+            u32 NumHits;
+            u32 FontIdx;
+            u32 MessageIdx;
+            float Offset;
+            padding[4];
+        } else if (EventLabel == "POINT") {
             u32 BonusPoints[7];
         } else if (EventLabel == "TARGET") {
             u32 TargetType;
@@ -505,6 +530,21 @@ struct StageEvent {
             padding[4];
             u32 ObjectId;
             padding[20];
+        } else if (EventLabel == "OBJECT") {
+            u32 AreaId;
+            u32 GimmickId;
+            padding[20];
+        } else if (EventLabel == "EVERYCOMBO" || EventLabel == "2COMBO" || EventLabel == "3COMBO" || EventLabel == "4COMBO" || EventLabel == "5COMBO") {
+            u32 VoiceId;
+            padding[24];
+        } else if (EventLabel == "SINGLECONBO" || EventLabel == "CHAINCONBO") {
+            u32 TimeoutFrames;
+            u32 CoinCount;
+            u32 Points;
+            u32 FontIdx;
+            u32 MessageIdx;
+            u8 SfxFlags[3];
+            padding[5];
         } else {
             u32 Flag;
             if (Flag == 0x16) {
@@ -520,8 +560,10 @@ struct StageEvent {
             }
         }
     }
-    else
-    u8 UnknownData[0x20];
+    else {
+        u8 UnknownData[0x20];
+    }
+    if (EventLabel != "") PreviousLabel = EventLabel;
 };
 
 struct FpbHeader {

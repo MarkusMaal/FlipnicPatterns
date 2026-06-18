@@ -502,7 +502,20 @@ struct StageEvent {
         padding[0x20] [[comment("End of event section")]];
     } else if (EventMagic == 0x6) {
         padding[4];
-        if (PreviousLabel == "VOICE_EVENT") {
+        if (PreviousLabel == "PLAY_PATH_BUMPER") {
+            if (EventLabel == "BUMPER") {
+                u32 AreaIdx;
+                u32 GimmickIdx;
+                u32 NumHits;
+                u32 FontIdx;
+                u32 Unknown;
+                padding[8];
+            } else {
+                u32 AreaIdx;
+                u32 GimmickIdx;
+                padding[0x14];
+            }
+        } else if (PreviousLabel == "VOICE_EVENT") {
             u32 VoiceIdx;
             padding[0x18];
         } else if (PreviousLabel == "LABEL_BUMPER") {
@@ -563,7 +576,9 @@ struct StageEvent {
     else {
         u8 UnknownData[0x20];
     }
-    if (EventLabel != "") PreviousLabel = EventLabel;
+    if ((EventLabel == "BUMPER" || EventLabel == "ENEMY") && PreviousLabel == "PLAY_PATH_BUMPER") {
+        // ignore
+    } else if (EventLabel != "") PreviousLabel = EventLabel;
 };
 
 struct FpbHeader {
